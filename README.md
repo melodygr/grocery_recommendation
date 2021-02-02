@@ -1,8 +1,12 @@
-# Time Series Analysis of Zillow Data
-Flatiron Data Science Project - Phase 4
+# Grocery Recommendation on InstaCart Data
+
+# UNDER CONSTRUCTION
+
+
+Flatiron Data Science Project - Capstone
 <img src= 
-"Images/melting_clock.jpg" 
-         alt="Melting Clock Image" 
+"Images/food_and_computer.jpg" 
+         alt="Food and Computer Image" 
          align="right"
          width="275" height="275"> 
          
