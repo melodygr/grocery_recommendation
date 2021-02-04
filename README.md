@@ -23,9 +23,9 @@ If time permits, I may also perform a market basket analysis to forecast what pr
 Skills demonstrated:  
 1. SQL table creation
 1. Data Clustering on users  
-2. Recommendation systems  
+2. Recommendation systems
 * Content-based filtering  
-* Collaborative filtering  
+* Collaborative filtering 
 3. Market Basket analysis  
 4. Website interface  
   
