@@ -8,7 +8,7 @@ Flatiron Data Science Project - Capstone
 "Images/food_and_computer.jpg" 
          alt="Food and Computer Image" 
          align="right"
-         width="275" height="275"> 
+         width="325" height="275"> 
          
 <!---Photo by Kevork Kurdoghlian on Unsplash--->       
 <!---<span>Photo by <a href="https://unsplash.com/@pedroplus?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Pedro da Silva</a> on <a href="https://unsplash.com/s/photos/stop-sign?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span>--->
@@ -16,10 +16,36 @@ Prepared and Presented by:  **_Melody Peterson_**
 [Presentation PDF](https://github.com/melodygr/dsc-phase-4-project/blob/main/Zillow_Presentation.pdf "Presentation PDF")
 
 ### Business Problem    
-For this analysis I will be working as a Data Scientist for a financial investment firm that is looking for short-term real estate investment opportunities for it's smaller investors to diversify their investment profiles.  I will be analyzing median monthly housing sales prices for over 14,000 United States zipcodes and choosing the best areas to further analyze for potential investment. I will then forecast future real estate prices in those zip codes.   
+For this analysis I will be working as a Data Scientist for a grocery store that is looking to discover insights from sales data that could be used for targeted direct mail marketing (specific coupons mailed to customers), targeted email marketing ("An item you like has gone on sale!"), and online shopper recommendations to 'add to cart' based on similar items and also based on items other people who bought that item have purchased.  
+<br/>
+If time permits, I may also perform a market basket analysis to forecast what products a customer is likely to purchase in their next order.  
 
+Skills demonstrated:  
+1. SQL table creation
+1. Data Clustering on users  
+2. Recommendation systems  
+* Content-based filtering  
+* Collaborative filtering  
+3. Market Basket analysis  
+4. Website interface  
+  
 ### Data    
-There are many datasets available on the [Zillow Research Page](https://www.zillow.com/research/data/).  The data used here represents median monthly housing sales prices for 14,723 zip codes over the period of April 1996 through April 2018 as reported by Zillow.  Each row represents a unique zip code. Each record contains location info and median housing sales prices for each month.  There are 14,723 rows and 272 variables: RegionID, RegionName (zip code), City, State, Metro, CountyName, SizeRank, finally 1996-04 through 2018-04 which represent 265 data points of monthly data for each zip code.  
+This data was retrieved from [Kaggle](https://www.kaggle.com/psparks/instacart-market-basket-analysis) and was provided by Instacart for a market basket analysis competition in 2018.  
+<br/>
+The data is divided into 6 files:  
+<br/>
+**Aisles.csv**: 134 Unique aisle numbers and descriptions  
+**Departments.csv**: 21 Unique department numbers and descriptions  
+**Products.csv**: 49,688 Unique product ids, with description, aisle id, and department id  
+**Orders.csv**: 3,421,083 Unique order id, with user id, order number, order_dow, order_hour_of_day, days_since_prior_order, and eval_set indicating if the order is in train, prior, or test  
+**Order_products__train.csv**: Order id, product id, add to cart order, and reorder indicator  
+**Order_products__prior.csv**: Order id, product id, add to cart order, and reorder indicator  
+  
+<img src= 
+"Images/data_table_schema.png" 
+         alt="Data Schema" 
+         align="center"
+         width="500" height="500"> 
 
 ### Modeling Process
 Starting with the initial data cleaning/scrubbing phase, it was discovered that many zip codes did not have the full date range of data.  Some zip codes had data only going back to 06-2014.  I chose not to eliminate any zip codes for missing values but would model on the data available.  My next step was to calculate an ROI for each zip code that I could compare across all of the data, so for instance a 10 year ROI would not be possible.  Since my business case was for short term investment opportunities, a 10 year ROI would not be necessary.  I calculated a 4 year ROI and the most recent year (2018) ROI.  Finally I calculated the average one year ROI over the past 3 years and chose to use that as my comparison metric.  
