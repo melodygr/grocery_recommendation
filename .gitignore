@@ -132,3 +132,4 @@ dmypy.json
 Data/
 rec_df.p
 cosine_sim_matrix.p
+*.p
