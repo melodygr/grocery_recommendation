@@ -131,3 +131,4 @@ dmypy.json
 # Large Data Files
 Data/
 rec_df.p
+cosine_sim_matrix.p
