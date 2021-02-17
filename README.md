@@ -12,7 +12,7 @@ Flatiron Data Science Project - Capstone
          
 <!---Photo by Kevork Kurdoghlian on Unsplash--->       
 <!---<span>Photo by <a href="https://unsplash.com/@pedroplus?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Pedro da Silva</a> on <a href="https://unsplash.com/s/photos/stop-sign?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span>--->
-Prepared and Presented by:  **_Melody Peterson_** 
+Prepared and Presented by:  **_Melody Peterson_**   
 [Presentation PDF](https://github.com/melodygr/capstone_recommendation/blob/main/Grocery%20MVP.pdf "Presentation PDF")
 
 ### Business Problem    
