@@ -12,8 +12,8 @@ Flatiron Data Science Project - Capstone
          
 <!---Photo by Kevork Kurdoghlian on Unsplash--->       
 <!---<span>Photo by <a href="https://unsplash.com/@pedroplus?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Pedro da Silva</a> on <a href="https://unsplash.com/s/photos/stop-sign?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span>--->
-Prepared and Presented by:  **_Melody Peterson_**  
-[Presentation PDF](https://github.com/melodygr/dsc-phase-4-project/blob/main/Zillow_Presentation.pdf "Presentation PDF")
+Prepared and Presented by:  **_Melody Peterson_** 
+[Presentation PDF](https://github.com/melodygr/capstone_recommendation/blob/main/Grocery%20MVP.pdf "Presentation PDF")
 
 ### Business Problem    
 For this analysis I will be working as a Data Scientist for a grocery store that is looking to discover insights from sales data that could be used for targeted direct mail marketing (specific coupons mailed to customers), targeted email marketing ("An item you like has gone on sale!"), and online shopper recommendations to 'add to cart' based on similar items and also based on items other people who bought that item have purchased.  
