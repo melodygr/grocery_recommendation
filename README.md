@@ -1,4 +1,4 @@
-# Grocery Recommendation on InstaCart Data
+# Grocery Recommendation on Instacart Data
 
 # UNDER CONSTRUCTION
 
@@ -26,6 +26,7 @@ Skills demonstrated:
 2. Recommendation systems
 * Content-based filtering  
 * Collaborative filtering 
+3. NLP product search engine  
 3. Market Basket analysis  
 4. Website interface  
   
