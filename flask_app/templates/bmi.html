@@ -9,16 +9,18 @@
 
 </head>
 
-<h1>THIS IS MY ROOT PAGE!</h1>
+<h1>YOU'VE REACHED THE BMI PAGE!</h1>
 
 <body>
 
 <div>
-    <p>Please enter your name.</p>
+    <p>Please enter height in inches and weight in pounds.</p>
 
     <form class="pure-form" method="POST" action="/">
-    Name:<br>
-    <input type="text" name="username"><br>
+    Height:<br>
+    <input type="text" height="userheight"><br>
+    Weight:<br>
+    <input type="text" weight="userweight"><br>
     <button type="submit" class="pure-button pure-button-primary" value="Submit">Submit</button>
     </form>    
 
@@ -27,8 +29,8 @@
 <br>
 
 <div>
-    {% if name %}
-        <p>Welcome to my site {{ name }}!</p>
+    {% if bmi %}
+        <p>Your BMI is  {{ bmi }}!</p>
     {% endif %}
 
 </div>
