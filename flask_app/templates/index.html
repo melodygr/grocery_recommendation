@@ -5,12 +5,25 @@
 
     <link rel='stylesheet' type='text/css' href="{{ url_for('static', filename='style.css') }}">
 
+    <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.5/build/pure-min.css" integrity="sha384-LTIDeidl25h2dPxrB2Ekgc9c7sEC3CWGM6HeFmuDNUjX76Ert4Z4IY714dhZHPLd" crossorigin="anonymous">
+
 </head>
 
 <h1>THIS IS MY ROOT PAGE!</h1>
 
-<body class="main">
+<body>
 
-<p>THIS IS THE PROOF!</p>
+<div>
+    <p>Please enter your name.</p>
+
+    <form class="pure-form" method="POST" action="/">
+    Name:<br>
+    <input type="text" name="username"><br>
+    <button type="submit" class="pure-button pure-button-primary" value="Submit">Submit</button>
+    </form>    
+
+</div>
+
+{{ name }}
 
 </body>
