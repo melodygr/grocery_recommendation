@@ -10,6 +10,9 @@ def rootpage():
     return render_template('index.html',
                             name=name)
 
+def calc_bmi(weight, height):
+    return round((weight/height/height)*703, 2)  
+
 @app.route('/bmi', methods=['GET', 'POST'])
 def bmipage():
     bmi = ''
@@ -24,8 +27,6 @@ def bmipage():
         bmi = calc_bmi(weight, height)
     return render_template('bmi.html',
                             bmi=bmi)
-
-def calc_bmi(weight, height):
-    return round((weight/height/height)*703, 2)                            
+                        
 
 app.run()
