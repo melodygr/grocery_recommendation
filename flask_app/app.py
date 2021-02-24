@@ -12,8 +12,6 @@ def rootpage():
 
 @app.route('/bmi', methods=['GET', 'POST'])
 def bmipage():
-    height = 0
-    weight = 0
     bmi = ''
     if request.method == 'POST' and 'userheight' in request.form:
         height = float(request.form.get('userheight'))
