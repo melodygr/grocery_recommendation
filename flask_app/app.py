@@ -10,7 +10,7 @@ def rootpage():
     return render_template('index.html',
                             name=name)
 
-@app.route('/bmi', methods=['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST'])
 def bmipage():
     bmi = ''
     if request.method == 'POST' and 'userheight' in request.form:
