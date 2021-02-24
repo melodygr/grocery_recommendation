@@ -20,7 +20,7 @@ def bmipage():
     print(request.method)
     print('userheight' in request.form)
     print('height' in request.form)
-    print(request.form.keys, ' ', request.form.items)
+    print(request.form.keys(), ' ', request.form.items())
     # if request.method == 'POST' and 'userheight' in request.form:
     if request.method == 'POST':
         print('I am in the if statement')
