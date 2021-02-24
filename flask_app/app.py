@@ -10,10 +10,11 @@ def rootpage():
     return render_template('index.html',
                             name=name)
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/bmi', methods=['GET', 'POST'])
 def bmipage():
     bmi = ''
     if request.method == 'POST' and 'userheight' in request.form:
+        print('I am in the if statement')
         height = float(request.form.get('userheight'))
         weight = float(request.form.get('userweight'))
         bmi = calc_bmi(weight, height)
