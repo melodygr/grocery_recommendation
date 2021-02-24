@@ -17,7 +17,6 @@ def calc_bmi(weight, height):
 def bmipage():
     bmi = ''
     if request.method == 'POST' and 'userheight' in request.form:
-        print('I am in the if statement')
         height = float(request.form.get('userheight'))
         weight = float(request.form.get('userweight'))
         bmi = calc_bmi(weight, height)
