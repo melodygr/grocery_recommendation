@@ -11,9 +11,9 @@
 
 <h1>YOU'VE REACHED THE BMI PAGE!</h1>
 
-<body class='main'>
+<body>
 
-<div>
+<div class='main'>
     <p>Please enter height in inches and weight in pounds.</p>
 
     <form class="pure-form" method="POST" action="/bmi">
@@ -28,7 +28,7 @@
 
 <br>
 
-<div>
+<div class='main'>
     {% if bmi %}
         <p>Your BMI is {{ bmi }}!</p>
     {% endif %}
