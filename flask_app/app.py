@@ -35,7 +35,8 @@ def bmipage():
 @app.route('/nlp', methods=['GET', 'POST'])
 def nlppage():
     nlp = ''
-    nlp0_id, nlp0_name = ''
+    nlp0_id = ''
+    nlp0_name = ''
     if request.method == 'POST' and 'searchwords' in request.form:
         nlp = stem_and_vectorize_products_based_on_metadata(request.form.get('searchwords'))
         if type(nlp) == NoneType:
