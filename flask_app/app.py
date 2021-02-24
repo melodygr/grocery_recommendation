@@ -15,7 +15,7 @@ def bmipage():
     bmi = ''
     print('before the if statement')
     print(request.method)
-    print('weight' in request.form)
+    print('userweight' in request.form)
     if request.method == 'POST' and 'userheight' in request.form:
         print('I am in the if statement')
         height = float(request.form.get('userheight'))
