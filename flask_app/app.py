@@ -13,6 +13,9 @@ def rootpage():
 @app.route('/bmi', methods=['GET', 'POST'])
 def bmipage():
     bmi = ''
+    print('before the if statement')
+    print(request.method)
+    print(request.form)
     if request.method == 'POST' and 'userheight' in request.form:
         print('I am in the if statement')
         height = float(request.form.get('userheight'))
