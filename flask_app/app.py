@@ -1,4 +1,12 @@
 from flask import Flask, request, render_template
+from sklearn.metrics.pairwise import cosine_similarity
+from sklearn.feature_extraction.text import CountVectorizer
+import nltk
+from nltk.stem.snowball import SnowballStemmer
+from user_functions import *
+import pandas as pd
+import numpy as np
+import pickle
 
 app = Flask(__name__)
 
@@ -22,6 +30,22 @@ def bmipage():
         bmi = calc_bmi(weight, height)
     return render_template('bmi.html',
                             bmi=bmi)
+                         
+
+@app.route('/nlp', methods=['GET', 'POST'])
+def nlppage():
+    nlp = ''
+    nlp0_id, nlp0_name = ''
+    if request.method == 'POST' and 'searchwords' in request.form:
+        nlp = stem_and_vectorize_products_based_on_metadata(request.form.get('searchwords'))
+        if type(nlp) == NoneType:
+            nlp=0
+        else:    
+            item_count = len(nlp)
+            nlp0_id = nlp.index[0]
+            nlp0_name = nlp.iloc[0]    
+    return render_template(nlp.html,
+                           nlp=nlp, nlp0_id, nlp0_name)    
                         
 
 app.run()

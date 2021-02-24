@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Natural Language Grocery Recommender</title>
+
+    <link rel='stylesheet' type='text/css' href="{{ url_for('static', filename='style.css') }}">
+
+    <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.5/build/pure-min.css" integrity="sha384-LTIDeidl25h2dPxrB2Ekgc9c7sEC3CWGM6HeFmuDNUjX76Ert4Z4IY714dhZHPLd" crossorigin="anonymous">
+
+</head>
+
+<h1>Welcome to my grocery recommender model!</h1>
+
+<body>
+
+<div class='main'>
+    <p>Please enter search words and I will return recommended products.</p>
+    <form class="pure-form" method="POST" action="/nlp">
+    <br>
+    <input type="text" name="searchwords"><br>
+    <button type="submit" class="pure-button pure-button-primary" value="Submit">Submit</button>
+    </form>
+</div>
+
+<br>
+
+<div class='main'>
+    {% if not nlp %}
+        <p>No similar products found.  Please refine your search terms and try again!</p>
+    {% endif %}
+
+    {% if nlp %}
+    <table class="pure-table-striped">
+        <thead>
+            <tr>
+                <th>Product #</th>
+                <th>Product Name</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="pure-table-odd">
+                <td>{{ nlp0_id }}</td>
+                <td>{{ nlp0_name }}</td>
+
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Toyota</td>
+
+            </tr>
+            <tr class="pure-table-odd">
+                <td>3</td>
+                <td>Hyundai</td>
+
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>Ford</td>
+
+            </tr>
+            <tr class="pure-table-odd">
+                <td>5</td>
+                <td>Nissan</td>
+
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>BMW</td>
+
+            </tr>
+            <tr class="pure-table-odd">
+                <td>7</td>
+                <td>Honda</td>
+
+            </tr>
+            <tr>
+                <td>8</td>
+                <td>Kia</td>
+
+            </tr>
+        </tbody>
+    </table>
+        <p>Your BMI is {{ bmi }}!</p>
+    {% endif %}
+</div>
+
+</body>
