@@ -6,6 +6,9 @@ from nltk.stem.snowball import SnowballStemmer
 import pandas as pd
 import numpy as np
 import pickle
+import sys
+
+sys.setrecursionlimit(2000)
 
 products_desc = pickle.load(open("Pickle/products_desc_stemmed.p", "rb"))
 stem_count_vec = pickle.load(open("Pickle/stem_count_vec.p", "rb"))
