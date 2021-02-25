@@ -9,6 +9,7 @@ import numpy as np
 import pickle
 
 app = Flask(__name__)
+app.config['DEBUG'] = True
 
 @app.route('/', methods=['GET', 'POST'])
 def rootpage():
