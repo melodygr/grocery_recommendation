@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
 <head>
-    <title>Natural Language Grocery Recommender</title>
+    <title>Singular Value Decomposition Grocery Recommender</title>
 
     <link rel='stylesheet' type='text/css' href="{{ url_for('static', filename='style.css') }}">
 
@@ -14,10 +14,16 @@
 <body>
 
 <div class='main'>
-    <p>Please enter search words and I will return recommended products.</p>
+    <p>Enter information to get product recommendations: </p>
     <form class="pure-form" method="POST" action="/nlp">
-    <br>
-    <input type="text" name="searchwords"><br>
+    Aisle to Rate: (enter 0 for any)<br>
+    <input type="text" name="rate_aisle"><br>
+    Number of products to rate:<br>
+    <input type="text" name="num_to_rate"><br>
+    Aisle to Recommend: (enter 0 for any)<br>
+    <input type="text" name="rec_aisle"><br>
+    Number of products to recommend:<br>
+    <input type="text" name="num_to_rec"><br>
     <button type="submit" class="pure-button pure-button-primary" value="Submit">Submit</button>
     </form>
 </div>
@@ -25,7 +31,7 @@
 <br>
 
 <div class='main'>
-    {% if request.method = 'POST' and not nlp %}
+    {% if not nlp %}
         <p>No similar products found.  Please refine your search terms and try again!</p>
     {% endif %}
 
