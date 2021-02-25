@@ -55,12 +55,12 @@ def nlppage():
 def svdpage():
     svd = ''
     if request.method == 'POST' and 'userheight' in request.form:
-        height = float(request.form.get('userheight'))
-        weight = float(request.form.get('userweight'))
-        svd = generate_new_user_recommendations(n_to_rate, n_to_rec, percent_diverse, 
+        # height = float(request.form.get('userheight'))
+        # weight = float(request.form.get('userweight'))
+        # svd = generate_new_user_recommendations(n_to_rate, n_to_rec, percent_diverse, 
                                                 rate_aisle=None, rec_aisle=None)
-    return render_template('bmi.html',
-                            bmi=bmi)                              
+    return render_template('svd.html',
+                            svd=svd)                              
                         
 
 app.run()

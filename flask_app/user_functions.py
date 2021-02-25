@@ -7,11 +7,26 @@ import pandas as pd
 import numpy as np
 import pickle
 import sys
+from surprise import NormalPredictor
+from surprise import Dataset
+from surprise import Reader
+from surprise.model_selection import cross_validate
+from surprise import SVD
+from surprise import KNNBaseline
+from surprise import KNNBasic
+from surprise.model_selection import train_test_split
+from surprise.prediction_algorithms import knns
+from surprise.similarities import cosine, msd, pearson
+from surprise.prediction_algorithms import SVD, SVDpp
+from surprise.model_selection import GridSearchCV
+from surprise import accuracy
 
 # sys.setrecursionlimit(2000)
 
 products_desc = pickle.load(open("Pickle/products_desc_stemmed.p", "rb"))
 new_rec_df = pickle.load(open("Pickle/new_rec_df.p", "rb"))
+short_head = pickle.load(open("Pickle/short_head.p", "rb"))
+reader = pickle.load(open("Pickle/reader.p", "rb"))
 stem_count_vec = pickle.load(open("Pickle/stem_count_vec.p", "rb"))
 stem_count_vec_matrix = pickle.load(open("Pickle/stem_count_vec_matrix.p", "rb"))
 stemmer = SnowballStemmer("english")   

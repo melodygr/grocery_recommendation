@@ -31,11 +31,11 @@
 <br>
 
 <div class='main'>
-    {% if not nlp %}
+    {% if not svd %}
         <p>No similar products found.  Please refine your search terms and try again!</p>
     {% endif %}
 
-    {% if nlp %}
+    {% if svd %}
     <table class="pure-table-striped">
         <thead>
             <tr>
@@ -87,7 +87,6 @@
             </tr>
         </tbody>
     </table>
-        <p>Your BMI is {{ bmi }}!</p>
     {% endif %}
 </div>
 
