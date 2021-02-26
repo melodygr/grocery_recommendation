@@ -7,6 +7,7 @@ import pandas as pd
 import numpy as np
 import pickle
 import sys
+import surprise
 from surprise import NormalPredictor
 from surprise import Dataset
 from surprise import Reader
@@ -37,7 +38,7 @@ def stem_and_vectorize_products_based_on_metadata(product_input):
     
     input_stemmed = ' '.join([stemmer.stem(word) for word in word_list])
     
-    vec = stem_count_vec.transform(pd.Series(input_stemmed))
+    vec = stem_count_vec.transform(np.array(input_stemmed).reshape(1,))
     
     simil = cosine_similarity(vec, stem_count_vec_matrix)
     
