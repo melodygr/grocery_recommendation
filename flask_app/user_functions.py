@@ -7,7 +7,6 @@ import pandas as pd
 import numpy as np
 import pickle
 import sys
-import surprise
 from surprise import NormalPredictor
 from surprise import Dataset
 from surprise import Reader
