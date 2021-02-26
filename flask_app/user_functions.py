@@ -16,7 +16,8 @@ from surprise import KNNBaseline
 from surprise import KNNBasic
 from surprise.model_selection import train_test_split
 from surprise.prediction_algorithms import knns
-from surprise.similarities import cosine, msd, pearson
+from surprise import cosine_similarity
+# from surprise.similarities import cosine, msd, pearson
 from surprise.prediction_algorithms import SVD, SVDpp
 from surprise.model_selection import GridSearchCV
 from surprise import accuracy
