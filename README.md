@@ -1,6 +1,4 @@
-# Grocery Recommendation on Instacart Data
-
-## UNDER CONSTRUCTION
+# Grocery Recommendation on Instacart Data  
 
 
 Flatiron Data Science Project - Capstone
