@@ -1,6 +1,6 @@
 # Grocery Recommendation on Instacart Data
 
-# UNDER CONSTRUCTION
+## UNDER CONSTRUCTION
 
 
 Flatiron Data Science Project - Capstone
@@ -20,15 +20,13 @@ For this analysis I will be working as a Data Scientist for a grocery store that
 <br/>
 If time permits, I may also perform a market basket analysis to forecast what products a customer is likely to purchase in their next order.  
 
-Skills demonstrated:  
-1. SQL table creation
+### Skills demonstrated:  
+
 1. Data Clustering on users  
-2. Recommendation systems
-* Content-based filtering  
-* Collaborative filtering 
+2. Recommendation systems - Content-based filtering and Collaborative filtering 
 3. NLP product search engine  
 3. Market Basket analysis  
-4. Website interface  
+4. FLASK Website interface  
   
 ### Data    
 This data was retrieved from [Kaggle](https://www.kaggle.com/psparks/instacart-market-basket-analysis) and was provided by Instacart for a market basket analysis competition in 2018.  
@@ -48,81 +46,59 @@ The data is divided into 6 files:
          align="center"
          width="500" height="500"> 
 
-### Modeling Process
-Starting with the initial data cleaning/scrubbing phase, it was discovered that many zip codes did not have the full date range of data.  Some zip codes had data only going back to 06-2014.  I chose not to eliminate any zip codes for missing values but would model on the data available.  My next step was to calculate an ROI for each zip code that I could compare across all of the data, so for instance a 10 year ROI would not be possible.  Since my business case was for short term investment opportunities, a 10 year ROI would not be necessary.  I calculated a 4 year ROI and the most recent year (2018) ROI.  Finally I calculated the average one year ROI over the past 3 years and chose to use that as my comparison metric.  
+### Modeling Process  
 
-Per my business problem, I was looking for the best ROI for small investors so I graphed ROI against the current Median Housing Price and then subset to the lower housing prices, eventually selecting six zip codes with high average ROI and low median housing prices for further analysis.  
+#### Exploratory Data Analysis  
 
-![Scatterplot](https://github.com/melodygr/dsc-phase-4-project/blob/main/Images/scatterplot2.png "ROI vs Median House Price")
-![Scatterplot](https://github.com/melodygr/dsc-phase-4-project/blob/main/Images/scatterplot3.png "ROI vs Median House Price")
-![Scatterplot](https://github.com/melodygr/dsc-phase-4-project/blob/main/Images/scatterplot4.png "ROI vs Median House Price")
+Useful information can be derived from just exploring the purchasing patterns in the data.  We can see which aisles and departments are ordered from the most and even down to the product level.  We can see the typical number of items in each order and how many days users go before their next order.  As an example, the most ordered departments can be seen below.  
 
-Here is a comparison of the data on the 6 zip codes over time.  As you can see, Indianapolis and Columbus have limited data.  But generally they all reflect the housing market crash of 2009 and then these six zipcodes have shown significant increases over the past 4 years.
+![Countplot](https://github.com/melodygr/grocery_recommendation/blob/main/Images/ordered_products_by_department.png "Department Graph") 
 
-![Lineplot](https://github.com/melodygr/dsc-phase-4-project/blob/main/Images/lineplotallzips.png "ROI vs Median House Price")
+#### Clustering  
 
-This graph of the Philadelphia data shows how each time series can be broken out into trend, seasonality, and noise components.  
+After EDA and merging of the table together, my first step was to cluster the users using a KMeans unsupervised clustering.  The clustering took into account how many purchases each user made from each aisle, as well as information such as number of days between orders and total number of orders placed.  As I added more clusters, the results continued to improve with more and more well-defined and separate clusters.  In the interest of practicality, however, I felt that more than 20 separate clusters of users began to be less feasible to separately market to each one.    
 
-![Decomposition](https://github.com/melodygr/dsc-phase-4-project/blob/main/Images/decomposition.png "ROI vs Median House Price")
+For visualizing the clusters I used t-SNE dimensionality reduction to give each cluster only 3 attributes, lending itself to a 3D model as seen below using Matplotlib.  I also made this graph using Plotly for more interactivity if used in a dashboard for analysis.  
 
-Initial ARMA (Auto-regressive Moving Average) models were run on all 6 zip codes to establish a baseline for future models, and then several models were run and parameters tuned to find the model with the least error.
-<br />  
-<img src= 
-"Images/baseline.png" 
-         alt="Baseline Models" 
-         align="center"
-         width="700" height="200">   
- 
-<br />  
-<br />  
-Final Seasonal ARIMA model parameters  
-<br />  
-<br />  
-<img src= 
-"Images/final_model_params.png" 
-         alt="Final Models" 
-         align="center"
-         width="900" height="260">            
-<br />  
+![Scatterplot](https://github.com/melodygr/grocery_recommendation/blob/main/Images/scatter_hue.png "Cluster Graph")  
 
-### Model Predictions  
-<br/>  
-<img src= 
-"Images/six_graphs.png" 
-         alt="Model Predictions" 
-         align="center"
-         width="1000" height="350"> 
-<br/>  
-<br/>  
+This heatmap also shows the differences in the clusters, particularly which grocery aisles are most purchased by each cluster.  
 
-### Model ROI Comparison  
-<br />  
-<br />  
-  
-<img src= 
-"Images/final_model_forecast_ROI.png" 
-         alt="Final Models" 
-         align="center"
-         width="700" height="160">  
+![Heatmap](https://github.com/melodygr/grocery_recommendation/blob/main/Images/cluster_heatmap.png "Cluster Heatmap")   
+
+I also felt it would be important to analyze the buying power of each cluster, as measured by orders per users, products per user, and percentage of users in each cluster.  Sorting these statistics different ways shows interesting results depending on what you are looking for. We can see that cluster 8 orders a very large number of products per user, but overall cluster 8 represents a small portion of all of the users. Cluster 12 represents over 50% of all of the users, but only 25% of the orders and only 17% of the products.
+
+#### NLP Search engine  
+
+Next I chose to generate recommendations for a user based on the product name, aisle, and department.  This would basically function as a search engine so the user could enter any text data and products most similar to that text would be displayed.  I stemmed the text data (basically removing suffixes) and used a count vectorizer to generate numerical representations of the words.  Then when a search is entered, the search goes through the same stemming and vectorizing and is compared to the existing product base using cosine similarity (a measure of the size of the angle generated between the word vectors.)  
+
+#### Simple Python RecommendatIon System Engine (surprise)  
+
+Due to the size of my dataset, it was not possible to generate a "memory-based" recommendation system, which uses similarity measures to match similar products or users together.  Instead, I created a "model-based" recommendation system using Singular Value Decomposition (SVD) that will generate predictions of a user's rating of an item that they have not previously ordered.  As opposed to a movie recommender based on users actual ratings of each movie, I chose to use the number of times a user has purchased an item as a stand in for an actual rating.  This generated a rating scale of 1 - 100 for each user and product combination.  The model showed promising results with an avarage error of only 3.46.  However, upon further inspection, the products with high purchase rates and therefore high ratings were not being predicted as accurately as the lower rated items simply because there are so few of them, like a large class imbalance.  So I instead changed to rating scale to 1 - 5 by simply setting any rating of 5 or higher equal to 5.  The average error on the new model, after performing a grid search for the best parameters, was reduced to only 1.26.
+
+Upon generating the top recommendations for each user, I discovered a large popularity bias in the recommendations.  Items that had been ordered frequently and by many users, like the top product of bananas, were being recommended to most users.  After researching ways to deal with popularity bias, [like this paper on Binary or Smooth xQuAD](https://www.researchgate.net/publication/330543775_Managing_Popularity_Bias_in_Recommender_Systems_with_Personalized_Re-ranking), I decided to a create personalized re-ranking of recommended products for each user. 
+
+This graph conveys the idea of a short head versus long tail in my product data.
+
+![Countplot](https://github.com/melodygr/grocery_recommendation/blob/main/Images/short_head.png "Short Head Product Graph")
+
+I created a function that would generate predicted ratings for each user based on the SVD model.  Then, before generating the output of the user ratings, the function takes in a specified weighting parameter for how many items should be generated from the short head of products or the rest of the products.  I defined the short head as the top 6200 (out of 45000) products which accounted for 80% of the purchases.  Generating the recommendations this way, allows to store to decide how diverse the ratings should be to encourage a diversity of recommendation, yet also keeps the ratings in the order they were predicted by the model and specific to each user.
+
+I also created a function to allow a new user to generate product recommendations by providing a specified number of ratings on sample products, and then rerunning the SVD to generate a list of predictions based on those rankings.  This function allows the user to optionally choose which aisle to rate products from, and which asile to provide recommendations for, as well as taking in the diversification parameter as described above.
+
+### FLASK app  
+
+
 
 ### Conclusions  
 
-* All training data far outperformed the test data, indicating some overfitting.
-* The models are all very skewed because of the market crash in 2009.
-* Columbus and Daytona had very large confidence intervals and overly high forecasts.
-* Chattanooga has outperformed even the confidence intervals of the model.
-* Philadelphia is potentially a good 50K investment , Indianapolis at 75K and Chattanooga at 100K investment
-  
-### Caveats:  
-  
-* Logged and differenced the data but some still did not test as stationary according to the Dickey Fuller test.
-* Real estate predictions can vary due to unseen fluctuations in the market  
+
   
 ### Next Steps / Future Work  
   
-* Obtain current data after 2018 for current predictions. Found zip code data on Redfin but it is rolling avg by zip code.
-* Investigate why some of the models seem so far off in their forecasts.
-* Try Facebook Prophet with each of the chosen zip codes
-* Try other methods of choosing zip codes, including clustering to find trends
-* Look for exogenous data to add to the model
+* Create a dashboard using DASH for graphical representation of the clusters
+* Generate word embeddings for the search engine for more specific search results
+* Create SQL tables of the data and load onto AWS
+* Use Heroku to push local FLASK app to the web
+* Perform market basket analysis by cluster using efficient-apriori model
 
