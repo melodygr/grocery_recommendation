@@ -33,9 +33,9 @@
 <br>
 
 <div class='main'>
-    <!-- {% if not svd %}
+    {% if (request.method == 'POST') and ('num_to_rec' in request.form) and (num_results==0)  %}
         <p>No similar products found.  Please refine your search terms and try again!</p>
-    {% endif %} -->
+    {% endif %}
 
 
     {% if (request.method == 'POST') and (num_results>0) %}
