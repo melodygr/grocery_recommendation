@@ -24,6 +24,8 @@
     <input type="text" name="rec_aisle"><br>
     Number of products to recommend:<br>
     <input type="text" name="num_to_rec"><br>
+    Diversity index: (percent 0.00 to 1.00)
+    <input type="text" name="diversity_index"><br>
     <button type="submit" class="pure-button pure-button-primary" value="Submit">Submit</button>
     </form>
 </div>
@@ -87,6 +89,19 @@
             </tr>
         </tbody>
     </table>
+
+    {% if (request.method == 'POST') and (num_results>0) %}
+    <div class="container">
+        <div class="alert alert-success" role="alert">
+        <p class="alert-heading">Result</p>
+        <p>Number of Records:{{len(svd)}}</p>
+        <ul>{% for i in svd %}
+            <li>{{i}}</li>
+            {%endfor %}
+        </ul>
+        </div>
+    {% endif %}    
+
     {% endif %}
 </div>
 

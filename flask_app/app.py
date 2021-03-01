@@ -38,8 +38,6 @@ def nlppage():
     nlp = ''
     if request.method == 'POST' and 'searchwords' in request.form:
         nlp = stem_and_vectorize_products_based_on_metadata(request.form.get('searchwords'))
-        if nlp.isna.any():
-            nlp = 0
     return render_template('nlp.html',
                            nlp=nlp, 
                            num_results=len(nlp)) 
@@ -47,10 +45,13 @@ def nlppage():
 @app.route('/svd', methods=['GET', 'POST'])
 def svdpage():
     svd = ''
-    # if request.method == 'POST' and 'userheight' in request.form:
-        # height = float(request.form.get('userheight'))
-        # weight = float(request.form.get('userweight'))
-        # svd = generate_new_user_recommendations(n_to_rate, n_to_rec, percent_diverse, rate_aisle=None, rec_aisle=None)
+    if request.method == 'POST' and 'num_to_rate' in request.form:
+        rate_aisle = request.form.get('rate_aisle')
+        n_to_rate = float(request.form.get('num_to_rate'))
+        rec_aisle = request.form.get('rec_aisle')
+        n_to_rec = float(request.form.get('num_to_rec'))
+        percent_diverse = float(request.form.get('diversity_index'))
+        svd = generate_new_user_recommendations(n_to_rate, n_to_rec, percent_diverse, rate_aisle=rate_aisle, rec_aisle=rec_aisle)
     return render_template('svd.html',
                             svd=svd)                              
                         
