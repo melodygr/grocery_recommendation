@@ -160,7 +160,7 @@ def generate_new_user_recommendations(n_to_rate, n_to_rec, percent_diverse,
     for product in new_ratings_df['product_id'].unique():
         product_name = products_desc[products_desc['product_id'] == product]['product_name'].iloc[0]
         product_aisle = products_desc[products_desc['product_id'] == product]['aisle'].iloc[0]
-        list_of_products.append((product, new_user_svd.predict(300000, product)[3], product_name, product_aisle))
+        list_of_products.append((product, round(new_user_svd.predict(300000, product)[3], 3), product_name, product_aisle))
     
     # order the predictions from highest to lowest rated
     ranked_products = sorted(list_of_products, key=lambda x:x[1], reverse=True)

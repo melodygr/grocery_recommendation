@@ -26,6 +26,8 @@
 
 <div class='main'>
     {% if (request.method == 'POST') and (num_results==0) %}
+         {{request.method}}
+         {{num_results}}
         <p>No similar products found.  Please refine your search terms and try again!</p>
     {% endif %}
 

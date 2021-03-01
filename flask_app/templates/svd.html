@@ -43,6 +43,8 @@
         <div class="alert alert-success" role="alert">
         <p class="alert-heading">Result</p>
         <p>Number of Records:{{num_results}}</p>
+        <br/>
+        <p>Product ID, rating, Product Name, Aisle</p>
         <ul>{% for i in svd %}
             <li>{{i}}</li>
             {% endfor %}
@@ -52,6 +54,7 @@
     <br/>
     <br/>
     <a class="center" href="/nlp">Try the NLP recommender!</a>
+    <br/>
 </div>
 
 </body>
