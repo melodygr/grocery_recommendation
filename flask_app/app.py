@@ -38,7 +38,7 @@ def nlppage():
     nlp = ''
     if request.method == 'POST' and 'searchwords' in request.form:
         nlp = stem_and_vectorize_products_based_on_metadata(request.form.get('searchwords'))
-        if pd.isna(nlp):
+        if pd.isna.any(nlp):
             nlp = 0
     return render_template('nlp.html',
                            nlp=nlp, 
