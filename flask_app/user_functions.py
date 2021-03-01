@@ -34,14 +34,14 @@ products_desc_stemmed = pd.read_pickle("Pickle/products_desc_stemmed.p")
 prod_columns = pickle.load(open("Pickle/prod_columns.p", "rb"))
 prod_index = pickle.load(open("Pickle/prod_index.p", "rb"))
 prod_name = pickle.load(open("Pickle/prod_name.p", "rb"))
-products_desc = pd.DataFrame(data=prod_name, index=prod_index, columns=['product_name'])
+prod_aisle = pickle.load(open("Pickle/prod_aisle.p", "rb"))
+prod_id = pickle.load(open("Pickle/prod_id.p", "rb"))
+products_desc = pd.DataFrame(data=[prod_name, prod_aisle, prod_id], index=prod_index, columns=['product_name', 'aisle', 'product_id'])
 
 def stem_and_vectorize_products_based_on_metadata(product_input):
 
     word_list = nltk.word_tokenize(product_input)
-    
     input_stemmed = ' '.join([stemmer.stem(word) for word in word_list])
-    
     vec = new_stem_count_vec.transform(np.array(input_stemmed).reshape(1,))
     
     simil = cosine_similarity(vec, new_stem_count_vec_matrix)
@@ -96,7 +96,7 @@ def recommend_diverse_products(ranked_products, n, aisle=None, percent_diverse=.
         if n == 0:
             return recs
             
-        prod_id, rating, prod_name, aisle_name = [*rec]
+        prod_id, _, prod_name, aisle_name = [*rec]
         
                
         if aisle:                                    # Did we specify an aisle? 
