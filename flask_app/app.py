@@ -9,7 +9,6 @@ import numpy as np
 import pickle
 
 app = Flask(__name__)
-app.config['DEBUG'] = True
 
 @app.route('/', methods=['GET', 'POST'])
 def rootpage():
@@ -21,6 +20,8 @@ def nlppage():
     nlp = ''
     if request.method == 'POST' and 'searchwords' in request.form:
         nlp = stem_and_vectorize_products_based_on_metadata(request.form.get('searchwords'))
+    if type(nlp) == NoneType:
+        nlp = 0    
     return render_template('nlp.html',
                            nlp=nlp, 
                            num_results=len(nlp)) 
@@ -40,4 +41,5 @@ def svdpage():
                             num_results=len(svd))                              
                         
 
-app.run()
+if __name__ == "__main__":
+    app.run(debug=True)

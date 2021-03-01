@@ -98,7 +98,8 @@ def recommend_diverse_products(ranked_products, n, aisle=None, percent_diverse=.
     for idx, rec in enumerate(ranked_products):
         
         if n == 0:
-            return recs
+            recommendation = pd.DataFrame(recs, columns=['Product ID', 'Rating', 'Product Name', 'Aisle'])
+            return recommendation.to_html
             
         prod_id, _, prod_name, aisle_name = [*rec]
         
