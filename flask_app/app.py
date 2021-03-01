@@ -11,6 +11,10 @@ import pickle
 app = Flask(__name__)
 app.config['DEBUG'] = True
 
+@app.route('/', methods=['GET', 'POST'])
+def rootpage():
+    return render_template('index.html')
+
 
 @app.route('/nlp', methods=['GET', 'POST'])
 def nlppage():
@@ -32,7 +36,8 @@ def svdpage():
         percent_diverse = float(request.form.get('diversity_index'))
         svd = generate_new_user_recommendations(n_to_rate, n_to_rec, percent_diverse, rate_aisle=rate_aisle, rec_aisle=rec_aisle)
     return render_template('svd.html',
-                            svd=svd)                              
+                            svd=svd,
+                            num_results=len(svd))                              
                         
 
 app.run()
