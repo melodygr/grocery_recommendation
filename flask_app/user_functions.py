@@ -24,12 +24,19 @@ from surprise import accuracy
 
 # sys.setrecursionlimit(2000)
 
-new_rec_df = pickle.load(open("Pickle/new_rec_df.p", "rb"))
+rec_columns = pickle.load(open('Pickle/rec_columns.p','rb'))
+rec_index = pickle.load(open('Pickle/rec_index.p', 'rb'))
+rec_user = pickle.load(open('Pickle/rec_user.p', 'rb'))
+rec_rating = pickle.load(open('Pickle/rec_rating.p', 'rb'))
+rec_prod_id = pickle.load(open('Pickle/rec_prod_id.p', 'rb'))
+new_rec_df = pd.DataFrame(np.column_stack([rec_user, rec_prod_id, rec_rating]), index=rec_index, columns=rec_columns)
+
 short_head = pickle.load(open("Pickle/short_head.p", "rb"))
 reader = pickle.load(open("Pickle/reader.p", "rb"))
 new_stem_count_vec = pickle.load(open("Pickle/new_stem_count_vec.p", "rb"))
 new_stem_count_vec_matrix = pickle.load(open("Pickle/new_stem_count_vec_matrix.p", "rb"))
 stemmer = SnowballStemmer("english")   
+
 products_desc_stemmed = pd.read_pickle("Pickle/products_desc_stemmed.p")
 prod_columns = pickle.load(open("Pickle/prod_columns.p", "rb"))
 prod_index = pickle.load(open("Pickle/prod_index.p", "rb"))
