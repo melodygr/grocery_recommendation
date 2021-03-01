@@ -11,16 +11,8 @@ import pickle
 app = Flask(__name__)
 app.config['DEBUG'] = True
 
-@app.route('/', methods=['GET', 'POST'])
-def rootpage():
-    name = ''
-    if request.method == 'POST' and 'username' in request.form:
-        name = request.form.get('username')
-    return render_template('index.html',
-                            name=name)
-                         
 
-@app.route('/nlp', methods=['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST'])
 def nlppage():
     nlp = ''
     if request.method == 'POST' and 'searchwords' in request.form:
