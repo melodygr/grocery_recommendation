@@ -31,7 +31,10 @@ new_stem_count_vec = pickle.load(open("Pickle/new_stem_count_vec.p", "rb"))
 new_stem_count_vec_matrix = pickle.load(open("Pickle/new_stem_count_vec_matrix.p", "rb"))
 stemmer = SnowballStemmer("english")   
 products_desc_stemmed = pd.read_pickle("Pickle/products_desc_stemmed.p")
-print(len(products_desc_stemmed))
+prod_columns = pickle.load(open("Pickle/prod_columns.p", "rb"))
+prod_index = pickle.load(open("Pickle/prod_index.p", "rb"))
+prod_name = pickle.load(open("Pickle/prod_name.p", "rb"))
+print(len(prod_index))
 
 def stem_and_vectorize_products_based_on_metadata(product_input):
 
@@ -44,8 +47,7 @@ def stem_and_vectorize_products_based_on_metadata(product_input):
     simil = cosine_similarity(vec, new_stem_count_vec_matrix)
     simil_shape = simil.reshape(new_stem_count_vec_matrix.shape[0],)
     simil_scores = pd.DataFrame(data=simil_shape) #, index=products_desc_stemmed.index, columns=['score'])
-    print(new_rec_df['rating'])
-    simil_scores.set_index(products_desc_stemmed.index)
+    simil_scores.set_index(prod_index)
     simil_scores.columns = ['score']
 
     # Don't return scores of zero, only as many positive scores as exist
