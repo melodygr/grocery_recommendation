@@ -28,8 +28,8 @@ products_desc = pickle.load(open("Pickle/products_desc_stemmed.p", "rb"))
 new_rec_df = pickle.load(open("Pickle/new_rec_df.p", "rb"))
 short_head = pickle.load(open("Pickle/short_head.p", "rb"))
 reader = pickle.load(open("Pickle/reader.p", "rb"))
-stem_count_vec = pickle.load(open("Pickle/stem_count_vec.p", "rb"))
-stem_count_vec_matrix = pickle.load(open("Pickle/stem_count_vec_matrix.p", "rb"))
+stem_count_vec = pickle.load(open("Pickle/new_stem_count_vec.p", "rb"))
+stem_count_vec_matrix = pickle.load(open("Pickle/new_stem_count_vec_matrix.p", "rb"))
 stemmer = SnowballStemmer("english")   
 
 def stem_and_vectorize_products_based_on_metadata(product_input):
@@ -38,11 +38,11 @@ def stem_and_vectorize_products_based_on_metadata(product_input):
     
     input_stemmed = ' '.join([stemmer.stem(word) for word in word_list])
     
-    vec = stem_count_vec.transform(np.array(input_stemmed).reshape(1,))
+    vec = new_stem_count_vec.transform(np.array(input_stemmed).reshape(1,))
     
-    simil = cosine_similarity(vec, stem_count_vec_matrix)
+    simil = cosine_similarity(vec, new_stem_count_vec_matrix)
     
-    simil_scores = pd.DataFrame(simil.reshape(stem_count_vec_matrix.shape[0],), 
+    simil_scores = pd.DataFrame(simil.reshape(new_stem_count_vec_matrix.shape[0],), 
                                 index = products_desc.index, columns=['score'])
     
     # Don't return scores of zero, only as many positive scores as exist
