@@ -24,13 +24,13 @@ from surprise import accuracy
 
 # sys.setrecursionlimit(2000)
 
-products_desc_stemmed = pickle.load(open("Pickle/products_desc_stemmed.p", "rb"))
 new_rec_df = pickle.load(open("Pickle/new_rec_df.p", "rb"))
 short_head = pickle.load(open("Pickle/short_head.p", "rb"))
 reader = pickle.load(open("Pickle/reader.p", "rb"))
 new_stem_count_vec = pickle.load(open("Pickle/new_stem_count_vec.p", "rb"))
 new_stem_count_vec_matrix = pickle.load(open("Pickle/new_stem_count_vec_matrix.p", "rb"))
 stemmer = SnowballStemmer("english")   
+products_desc_stemmed = pickle.load(open("Pickle/products_desc_stemmed.p", "rb"))
 
 def stem_and_vectorize_products_based_on_metadata(product_input):
 
@@ -135,7 +135,7 @@ def recommend_diverse_products(ranked_products, n, aisle=None, percent_diverse=.
 def generate_new_user_recommendations(n_to_rate, n_to_rec, percent_diverse, 
                                       rate_aisle=None, rec_aisle=None):
     # Get user ratings
-    user_rating = grocery_rater(products_desc, n_to_rate, aisle=rate_aisle)
+    user_rating = grocery_rater(products_desc_stemmed, n_to_rate, aisle=rate_aisle)
 
     # add the new ratings to the original ratings DataFrame
     print('Creating ratings dataset...')
@@ -151,8 +151,8 @@ def generate_new_user_recommendations(n_to_rate, n_to_rec, percent_diverse,
     print('Making predictions...')
     list_of_products = []
     for product in new_ratings_df['product_id'].unique():
-        product_name = products_desc[products_desc['product_id'] == product]['product_name'].iloc[0]
-        product_aisle = products_desc[products_desc['product_id'] == product]['aisle'].iloc[0]
+        product_name = products_desc_stemmed[products_desc_stemmed['product_id'] == product]['product_name'].iloc[0]
+        product_aisle = products_desc_stemmed[products_desc_stemmed['product_id'] == product]['aisle'].iloc[0]
         list_of_products.append((product, new_user_svd.predict(300000, product)[3], product_name, product_aisle))
     
     # order the predictions from highest to lowest rated
