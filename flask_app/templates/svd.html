@@ -33,62 +33,10 @@
 <br>
 
 <div class='main'>
-    {% if not svd %}
+    <!-- {% if not svd %}
         <p>No similar products found.  Please refine your search terms and try again!</p>
-    {% endif %}
+    {% endif %} -->
 
-    {% if svd %}
-    <table class="pure-table-striped">
-        <thead>
-            <tr>
-                <th>Product #</th>
-                <th>Product Name</th>
-
-            </tr>
-        </thead>
-        <tbody>
-            <tr class="pure-table-odd">
-                <td>{{ nlp0_id }}</td>
-                <td>{{ nlp0_name }}</td>
-
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>Toyota</td>
-
-            </tr>
-            <tr class="pure-table-odd">
-                <td>3</td>
-                <td>Hyundai</td>
-
-            </tr>
-            <tr>
-                <td>4</td>
-                <td>Ford</td>
-
-            </tr>
-            <tr class="pure-table-odd">
-                <td>5</td>
-                <td>Nissan</td>
-
-            </tr>
-            <tr>
-                <td>6</td>
-                <td>BMW</td>
-
-            </tr>
-            <tr class="pure-table-odd">
-                <td>7</td>
-                <td>Honda</td>
-
-            </tr>
-            <tr>
-                <td>8</td>
-                <td>Kia</td>
-
-            </tr>
-        </tbody>
-    </table>
 
     {% if (request.method == 'POST') and (num_results>0) %}
     <div class="container">

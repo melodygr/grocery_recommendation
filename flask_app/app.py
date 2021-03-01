@@ -3,7 +3,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.feature_extraction.text import CountVectorizer
 import nltk
 from nltk.stem.snowball import SnowballStemmer
-from user_functions import stem_and_vectorize_products_based_on_metadata
+from user_functions import stem_and_vectorize_products_based_on_metadata, generate_new_user_recommendations
 import pandas as pd
 import numpy as np
 import pickle
