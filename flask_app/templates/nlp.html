@@ -25,7 +25,7 @@
 <br>
 
 <div class='main'>
-    {% if (request.method == 'POST') and (not nlp) %}
+    {% if (request.method == 'POST') & (not nlp) %}
         <p>No similar products found.  Please refine your search terms and try again!</p>
     {% endif %}
 
