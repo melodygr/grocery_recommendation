@@ -40,9 +40,6 @@ def nlppage():
         nlp = stem_and_vectorize_products_based_on_metadata(request.form.get('searchwords'))
         if type(nlp) == NoneType:
             nlp=0
-        else:
-            nlp0_id = nlp.index[0]
-            nlp0_name = nlp.iloc[0]    
     return render_template('nlp.html',
                            nlp=nlp, 
                            num_results=len(nlp)) 
