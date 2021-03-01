@@ -16,13 +16,10 @@ from surprise import KNNBaseline
 from surprise import KNNBasic
 from surprise.model_selection import train_test_split
 from surprise.prediction_algorithms import knns
-# from surprise import cosine_similarity
-# from surprise.similarities import cosine, msd, pearson
 from surprise.prediction_algorithms import SVD, SVDpp
 from surprise.model_selection import GridSearchCV
 from surprise import accuracy
 
-# sys.setrecursionlimit(2000)
 
 rec_columns = pickle.load(open('Pickle/rec_columns.p','rb'))
 rec_index = pickle.load(open('Pickle/rec_index.p', 'rb'))
