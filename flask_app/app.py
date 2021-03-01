@@ -3,7 +3,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.feature_extraction.text import CountVectorizer
 import nltk
 from nltk.stem.snowball import SnowballStemmer
-from user_functions import *
+from user_functions import stem_and_vectorize_products_based_on_metadata
 import pandas as pd
 import numpy as np
 import pickle
@@ -36,21 +36,16 @@ def bmipage():
 @app.route('/nlp', methods=['GET', 'POST'])
 def nlppage():
     nlp = ''
-    nlp0_id = ''
-    nlp0_name = ''
     if request.method == 'POST' and 'searchwords' in request.form:
         nlp = stem_and_vectorize_products_based_on_metadata(request.form.get('searchwords'))
         if type(nlp) == NoneType:
             nlp=0
-        else:    
-            item_count = len(nlp)
+        else:
             nlp0_id = nlp.index[0]
             nlp0_name = nlp.iloc[0]    
     return render_template('nlp.html',
                            nlp=nlp, 
-                           num_results=len(nlp),
-                           nlp0_id=nlp0_id, 
-                           nlp0_name=nlp0_name) 
+                           num_results=len(nlp)) 
 
 @app.route('/svd', methods=['GET', 'POST'])
 def svdpage():
