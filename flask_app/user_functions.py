@@ -47,8 +47,6 @@ def stem_and_vectorize_products_based_on_metadata(product_input):
     simil = cosine_similarity(vec, new_stem_count_vec_matrix)
     simil_shape = simil.reshape(new_stem_count_vec_matrix.shape[0],)
     simil_scores = pd.DataFrame(data=simil_shape, index=prod_index, columns=['score'])
-    # simil_scores.set_index(prod_index)
-    # simil_scores.columns = ['score']
 
     # Don't return scores of zero, only as many positive scores as exist
     non_zero_scores = simil_scores[simil_scores['score'] > 0]
@@ -63,7 +61,6 @@ def stem_and_vectorize_products_based_on_metadata(product_input):
     
     similarity_scores = simil_scores.sort_values(['score'], ascending=False)[:item_count]
     
-    # return (products_desc_stemmed['product_name'].iloc[similarity_scores.index])
     return prod_name[similarity_scores.index]
 
 def grocery_rater(df, num, aisle=None):
@@ -138,7 +135,7 @@ def recommend_diverse_products(ranked_products, n, aisle=None, percent_diverse=.
 def generate_new_user_recommendations(n_to_rate, n_to_rec, percent_diverse, 
                                       rate_aisle=None, rec_aisle=None):
     # Get user ratings
-    user_rating = grocery_rater(products_desc_stemmed, n_to_rate, aisle=rate_aisle)
+    user_rating = grocery_rater(products_desc, n_to_rate, aisle=rate_aisle)
 
     # add the new ratings to the original ratings DataFrame
     print('Creating ratings dataset...')

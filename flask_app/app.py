@@ -18,19 +18,6 @@ def rootpage():
         name = request.form.get('username')
     return render_template('index.html',
                             name=name)
-
-def calc_bmi(weight, height):
-    return round((weight/height/height)*703, 2)  
-
-@app.route('/bmi', methods=['GET', 'POST'])
-def bmipage():
-    bmi = ''
-    if request.method == 'POST' and 'userheight' in request.form:
-        height = float(request.form.get('userheight'))
-        weight = float(request.form.get('userweight'))
-        bmi = calc_bmi(weight, height)
-    return render_template('bmi.html',
-                            bmi=bmi)
                          
 
 @app.route('/nlp', methods=['GET', 'POST'])
