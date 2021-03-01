@@ -25,9 +25,11 @@
 <br>
 
 <div class='main'>
+    {% if (request.method == 'POST') and (num_results==0) %}
+        <p>No similar products found.  Please refine your search terms and try again!</p>
+    {% endif %}
 
-
-    {% if nlp %}
+    {% if (request.method == 'POST') and (num_results>0) %}
     <table class="pure-table-striped">
         <thead>
             <tr>
