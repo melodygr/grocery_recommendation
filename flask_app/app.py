@@ -48,6 +48,7 @@ def nlppage():
             nlp0_name = nlp.iloc[0]    
     return render_template('nlp.html',
                            nlp=nlp, 
+                           num_results=len(nlp),
                            nlp0_id=nlp0_id, 
                            nlp0_name=nlp0_name) 
 
