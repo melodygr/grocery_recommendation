@@ -24,7 +24,7 @@ from surprise import accuracy
 
 # sys.setrecursionlimit(2000)
 
-products_desc = pickle.load(open("Pickle/products_desc_stemmed.p", "rb"))
+products_desc_stemmed = pickle.load(open("Pickle/products_desc_stemmed.p", "rb"))
 new_rec_df = pickle.load(open("Pickle/new_rec_df.p", "rb"))
 short_head = pickle.load(open("Pickle/short_head.p", "rb"))
 reader = pickle.load(open("Pickle/reader.p", "rb"))
@@ -42,9 +42,9 @@ def stem_and_vectorize_products_based_on_metadata(product_input):
     
     simil = cosine_similarity(vec, new_stem_count_vec_matrix)
     simil_shape = simil.reshape(new_stem_count_vec_matrix.shape[0],)
-    simil_scores = pd.DataFrame(data=simil_shape) #, index=products_desc.index, columns=['score'])
-    print(products_desc)
-    simil_scores.set_index(products_desc.index)
+    simil_scores = pd.DataFrame(data=simil_shape) #, index=products_desc_stemmed.index, columns=['score'])
+    print(products_desc_stemmed)
+    simil_scores.set_index(products_desc_stemmed.index)
     simil_scores.columns = ['score']
 
     # Don't return scores of zero, only as many positive scores as exist
@@ -60,7 +60,7 @@ def stem_and_vectorize_products_based_on_metadata(product_input):
     
     similarity_scores = simil_scores.sort_values(['score'], ascending=False)[:item_count]
     
-    return (products_desc['product_name'].iloc[similarity_scores.index])
+    return (products_desc_stemmed['product_name'].iloc[similarity_scores.index])
 
 
 def grocery_rater(df, num, aisle=None):
