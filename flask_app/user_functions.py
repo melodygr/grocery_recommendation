@@ -31,7 +31,7 @@ new_stem_count_vec = pickle.load(open("Pickle/new_stem_count_vec.p", "rb"))
 new_stem_count_vec_matrix = pickle.load(open("Pickle/new_stem_count_vec_matrix.p", "rb"))
 stemmer = SnowballStemmer("english")   
 products_desc_stemmed = pd.read_pickle("Pickle/products_desc_stemmed.p")
-print(products_desc_stemmed.columns.values)
+print(len(products_desc_stemmed))
 
 def stem_and_vectorize_products_based_on_metadata(product_input):
 
