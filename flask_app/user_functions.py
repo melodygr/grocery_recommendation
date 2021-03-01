@@ -34,7 +34,7 @@ products_desc_stemmed = pd.read_pickle("Pickle/products_desc_stemmed.p")
 prod_columns = pickle.load(open("Pickle/prod_columns.p", "rb"))
 prod_index = pickle.load(open("Pickle/prod_index.p", "rb"))
 prod_name = pickle.load(open("Pickle/prod_name.p", "rb"))
-products_desc = pd.DataFrame(data=product_name, index=prod_index, columns=['product_name'])
+products_desc = pd.DataFrame(data=prod_name, index=prod_index, columns=['product_name'])
 
 def stem_and_vectorize_products_based_on_metadata(product_input):
 
