@@ -42,8 +42,7 @@ def stem_and_vectorize_products_based_on_metadata(product_input):
     
     simil = cosine_similarity(vec, new_stem_count_vec_matrix)
     
-    simil_scores = pd.DataFrame(simil.reshape(new_stem_count_vec_matrix.shape[0],), 
-                                index = products_desc.index, columns=['score'])
+    simil_scores = pd.DataFrame(simil.reshape(new_stem_count_vec_matrix.shape[0],), index = products_desc.index, columns=['score'])
     
     # Don't return scores of zero, only as many positive scores as exist
     non_zero_scores = simil_scores[simil_scores['score'] > 0]
