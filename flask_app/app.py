@@ -12,7 +12,7 @@ app = Flask(__name__)
 app.config['DEBUG'] = True
 
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/nlp', methods=['GET', 'POST'])
 def nlppage():
     nlp = ''
     if request.method == 'POST' and 'searchwords' in request.form:
