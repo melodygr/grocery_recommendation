@@ -35,10 +35,8 @@
         <div class="alert alert-success" role="alert">
         <p class="alert-heading">Result</p>
         <p>Number of Records:{{num_results}}</p>
-        <ul>{% for i in nlp %}
-            <li>{{i}}</li>
-            {%endfor %}
-        </ul>
+        <br/>
+            {{ nlp|safe }}
         </div>
     {% endif %}
     <br/>

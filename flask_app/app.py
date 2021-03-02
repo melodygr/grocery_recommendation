@@ -18,8 +18,9 @@ def rootpage():
 @app.route('/nlp', methods=['GET', 'POST'])
 def nlppage():
     nlp = ''
+    num_results = ''
     if request.method == 'POST' and 'searchwords' in request.form:
-        nlp = stem_and_vectorize_products_based_on_metadata(request.form.get('searchwords'))
+        num_results, nlp = stem_and_vectorize_products_based_on_metadata(request.form.get('searchwords'))
     if nlp is None:
         nlp = 0    
     return render_template('nlp.html',
