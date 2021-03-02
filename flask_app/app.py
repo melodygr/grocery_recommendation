@@ -18,7 +18,7 @@ def rootpage():
 @app.route('/nlp', methods=['GET', 'POST'])
 def nlppage():
     nlp = ''
-    num_results = ''
+    num_results = 0
     if request.method == 'POST' and 'searchwords' in request.form:
         num_results, nlp = stem_and_vectorize_products_based_on_metadata(request.form.get('searchwords'))
     if nlp is None:
@@ -30,7 +30,7 @@ def nlppage():
 @app.route('/svd', methods=['GET', 'POST'])
 def svdpage():
     svd_recs = ''
-    num_results = ''
+    num_results = 0
     if request.method == 'POST' and 'num_to_rate' in request.form:
         rate_aisle = request.form.get('rate_aisle')
         n_to_rate = float(request.form.get('num_to_rate'))
