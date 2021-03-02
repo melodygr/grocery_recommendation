@@ -56,7 +56,7 @@ def stem_and_vectorize_products_based_on_metadata(product_input):
     non_zero_scores = simil_scores[simil_scores['score'] > 0]
     
     if len(non_zero_scores) == 0:
-        return
+        return 0, 'None'
     
     if len(non_zero_scores) < 10:
         item_count = len(non_zero_scores)
@@ -64,6 +64,7 @@ def stem_and_vectorize_products_based_on_metadata(product_input):
         item_count = 10
     
     similarity_scores = simil_scores.sort_values(['score'], ascending=False)[:item_count]
+
 
     return item_count, (products_desc.iloc[list(similarity_scores.index)]).to_html(index=False, justify='center')
 
@@ -93,7 +94,7 @@ def recommend_diverse_products(ranked_products, n, aisle=None, percent_diverse=.
     
     if n < 1:
         print('Number of recommended products must be 1 or more')
-        return len(recs), recs
+        return 0, "None"
     
     for idx, rec in enumerate(ranked_products):
         
