@@ -65,7 +65,7 @@ def stem_and_vectorize_products_based_on_metadata(product_input):
     
     similarity_scores = simil_scores.sort_values(['score'], ascending=False)[:item_count]
 
-    return item_count, (products_desc.iloc[list(similarity_scores.index)]).to_html(index=False, justify=center)
+    return item_count, (products_desc.iloc[list(similarity_scores.index)]).to_html(index=False, justify='center')
 
 def grocery_rater(df, num, aisle=None):
     userID = 300000
@@ -99,7 +99,7 @@ def recommend_diverse_products(ranked_products, n, aisle=None, percent_diverse=.
         
         if n == 0:
             recommendation = pd.DataFrame(recs, columns=['Product ID', 'Rating', 'Product Name', 'Aisle'])
-            return len(recs), recommendation.to_html
+            return len(recs), recommendation.to_html(index=False, justify='center')
             
         prod_id, _, prod_name, aisle_name = [*rec]
         
