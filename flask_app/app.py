@@ -20,7 +20,7 @@ def nlppage():
     nlp = ''
     if request.method == 'POST' and 'searchwords' in request.form:
         nlp = stem_and_vectorize_products_based_on_metadata(request.form.get('searchwords'))
-    if type(nlp) == NoneType:
+    if nlp is None:
         nlp = 0    
     return render_template('nlp.html',
                            nlp=nlp, 
@@ -35,10 +35,10 @@ def svdpage():
         rec_aisle = request.form.get('rec_aisle')
         n_to_rec = float(request.form.get('num_to_rec'))
         percent_diverse = float(request.form.get('diversity_index'))
-        svd = generate_new_user_recommendations(n_to_rate, n_to_rec, percent_diverse, rate_aisle=rate_aisle, rec_aisle=rec_aisle)
+        svd_recs = generate_new_user_recommendations(n_to_rate, n_to_rec, percent_diverse, rate_aisle=rate_aisle, rec_aisle=rec_aisle)
     return render_template('svd.html',
-                            svd=svd,
-                            num_results=len(svd))                              
+                            svd_recs=svd_recs,
+                            num_results=num_results)                              
                         
 
 if __name__ == "__main__":

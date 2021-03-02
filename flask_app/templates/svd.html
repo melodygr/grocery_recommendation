@@ -33,7 +33,7 @@
 <br>
 
 <div class='main'>
-    {% if (request.method == 'POST') and ('num_to_rec' in request.form) and (num_results==0)  %}
+    {% if (request.method == 'POST') and ('num_to_rec' in request.form) and (num_results == 0) %}
         <p>No similar products found.  Please refine your search terms and try again!</p>
     {% endif %}
 
@@ -44,7 +44,7 @@
         <p class="alert-heading">Result</p>
         <p>Number of Records:{{num_results}}</p>
         <br/>
-        {{ svd|safe }} 
+        {{ svd_recs|safe }} 
         </div>
     {% endif %}    
     <br/>
