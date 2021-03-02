@@ -40,11 +40,11 @@
 
     {% if (request.method == 'POST') and (num_results>0) %}
     <div class="container">
-        <div class="alert alert-success" role="alert">
+        <!-- <div class="alert alert-success" role="alert">
         <p class="alert-heading">Result</p>
         <p>Number of Records:{{num_results}}</p>
         <br/>
-        </div>
+        </div> -->
         {{ svd_recs|safe }} 
     {% endif %}    
     <br/>

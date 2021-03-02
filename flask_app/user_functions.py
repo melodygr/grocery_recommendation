@@ -7,18 +7,9 @@ import pandas as pd
 import numpy as np
 import pickle
 import sys
-from surprise import NormalPredictor
 from surprise import Dataset
 from surprise import Reader
-from surprise.model_selection import cross_validate
 from surprise import SVD
-from surprise import KNNBaseline
-from surprise import KNNBasic
-from surprise.model_selection import train_test_split
-from surprise.prediction_algorithms import knns
-from surprise.prediction_algorithms import SVD, SVDpp
-from surprise.model_selection import GridSearchCV
-from surprise import accuracy
 
 
 rec_columns = pickle.load(open('Pickle/rec_columns.p','rb'))
