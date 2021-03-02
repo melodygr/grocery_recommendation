@@ -26,7 +26,7 @@
 <br>
 
 <div class='main'>
-    {% if (request.method == 'POST') and ('searchwords' in request.form) and (nlp==0) %}
+    {% if (request.method == 'POST') and ('searchwords' in request.form) and (num_results==0) %}
         <p>No similar products found.  Please refine your search terms and try again!</p>
     {% endif %}
 
