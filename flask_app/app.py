@@ -25,7 +25,7 @@ def nlppage():
         nlp = 0    
     return render_template('nlp.html',
                            nlp=nlp, 
-                           num_results=len(nlp)) 
+                           num_results=num_results)
 
 @app.route('/svd', methods=['GET', 'POST'])
 def svdpage():
