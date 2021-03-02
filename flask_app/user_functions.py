@@ -67,6 +67,9 @@ def stem_and_vectorize_products_based_on_metadata(product_input):
     print(list(similarity_scores.index))
     print(products_desc.iloc[0])
     print(products_desc.iloc[[0,3]])
+    print(item_count)
+    print(products_desc.iloc[list(similarity_scores.index)])
+    print((products_desc.iloc[list(similarity_scores.index)]).to_html)
     return item_count, (products_desc.iloc[list(similarity_scores.index)]).to_html
 
 def grocery_rater(df, num, aisle=None):
