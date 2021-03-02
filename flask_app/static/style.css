@@ -2,6 +2,7 @@
 
 h1 {
     text-align: left;
+    padding-left: 10pt;
 }
 
 
@@ -18,5 +19,5 @@ body {
 }
 
 .table1 {
-    background-color:rgb(130, 238, 202)
+    background-color:#cefcec
 }

@@ -9,7 +9,7 @@
 
 </head>
 
-<h1>NLP grocery recommender</h1>
+<h1>NLP Grocery Recommender</h1>
 
 <body>
 
@@ -42,9 +42,17 @@
     {% endif %}
     <br/>
     <br/>
-    <a class="center" href="/svd">Try the SVD recommender!</a>
+    <form class="pure-form" method="POST" action="/svd">
+        <button type="submit" class="pure-button pure-button-active" value="Submit">Try the SVD</button>
+    </form>    
     <br/>
-    <a class="center" href="/">Home</a>
+    <form class="pure-form" method="POST" action="/">
+        <button type="submit" class="pure-button pure-button-active" value="Submit">Home</button>
+    </form>   
+    <!-- <a class="center" href="/svd">Try the SVD recommender!</a>
+    <br/>
+    <a class="center" href="/">Home</a> -->
+    <br>
 </div>
 
 

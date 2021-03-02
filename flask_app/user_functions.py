@@ -40,7 +40,7 @@ prod_index = pickle.load(open("Pickle/prod_index.p", "rb"))
 prod_name = pickle.load(open("Pickle/prod_name.p", "rb"))
 prod_aisle = pickle.load(open("Pickle/prod_aisle.p", "rb"))
 prod_id = pickle.load(open("Pickle/prod_id.p", "rb"))
-products_desc = pd.DataFrame(np.column_stack([prod_name, prod_aisle, prod_id]), index=prod_index, columns=['product_name', 'aisle', 'product_id'])
+products_desc = pd.DataFrame(np.column_stack([prod_name, prod_aisle, prod_id]), index=prod_index, columns=['Product Name', 'Aisle', 'Product ID'])
 
 def stem_and_vectorize_products_based_on_metadata(product_input):
 
@@ -100,7 +100,7 @@ def recommend_diverse_products(ranked_products, n, aisle=None, percent_diverse=.
         
         if n == 0:
             recommendation = pd.DataFrame(recs, columns=['Product ID', 'Rating', 'Product Name', 'Aisle'])
-            return len(recs), recommendation.to_html(index=False, justify='center')
+            return len(recs), recommendation.to_html(index=False, justify='center', classes='table1', border=2)
             
         prod_id, _, prod_name, aisle_name = [*rec]
         
