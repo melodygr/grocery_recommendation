@@ -21,7 +21,7 @@ def nlppage():
     num_results = 0
     if request.method == 'POST' and 'searchwords' in request.form:
         num_results, nlp = stem_and_vectorize_products_based_on_metadata(request.form.get('searchwords'))
-    print(nlp)
+    print('nlp in app is: ', nlp)
     if nlp is None:
         nlp = 0    
     return render_template('nlp.html',
