@@ -64,15 +64,15 @@ def grocery_rater(df, num, aisle=None):
     rating_list = []
     while num > 0:
         if aisle:
-            product = df[df['aisle'].str.contains(aisle)].sample(1)
+            product = df[df['Aisle'].str.contains(aisle)].sample(1)
         else:
             product = df.sample(1)
-        print('\n', product['product_name'].iloc[0])
+        print('\n', product['Product Name'].iloc[0])
         rating = input('How do you rate this product on a scale of 1-5, choose 0 to rate a different product:\n')
         if rating == '0':
             continue
         else:
-            rating_one_product = {'user_id':userID,'product_id':product['product_id'].iloc[0],'rating':int(rating)}
+            rating_one_product = {'user_id':userID,'product_id':product['Product ID'].iloc[0],'rating':int(rating)}
             rating_list.append(rating_one_product) 
             num -= 1
     return rating_list
@@ -148,8 +148,8 @@ def generate_new_user_recommendations(n_to_rate, n_to_rec, percent_diverse,
     print('Making predictions...')
     list_of_products = []
     for product in new_ratings_df['product_id'].unique():
-        product_name = products_desc[products_desc['product_id'] == product]['product_name'].iloc[0]
-        product_aisle = products_desc[products_desc['product_id'] == product]['aisle'].iloc[0]
+        product_name = products_desc[products_desc['Product ID'] == product]['Product Name'].iloc[0]
+        product_aisle = products_desc[products_desc['Product ID'] == product]['Aisle'].iloc[0]
         list_of_products.append((product, round(new_user_svd.predict(300000, product)[3], 3), product_name, product_aisle))
     
     # order the predictions from highest to lowest rated
