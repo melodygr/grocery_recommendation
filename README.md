@@ -93,13 +93,13 @@ This graph conveys the idea of a short head versus long tail in my product data.
 
 I created a function that would generate predicted ratings for each user based on the SVD model.  Then, before generating the output of the user ratings, the function takes in a specified weighting parameter for how many items should be generated from the short head of products or the rest of the products.  I defined the short head as the top 6200 (out of 45000) products which accounted for 80% of the purchases.  Generating the recommendations this way, allows to store to decide how diverse the ratings should be to encourage a diversity of recommendation, yet also keeps the ratings in the order they were predicted by the model and specific to each user.
 
-I also created a function to allow a new user to generate product recommendations by providing a specified number of ratings on sample products, and then rerunning the SVD to generate a list of predictions based on those rankings.  This function allows the user to optionally choose which aisle to rate products from, and which asile to provide recommendations for, as well as taking in the diversification parameter as described above.  
+I also created a function to allow a new user to generate product recommendations by providing a specified number of ratings on sample products, and then rerunning the SVD to generate a list of predictions based on those rankings.  This function allows the user to optionally choose which aisle to rate products from, and which aisle to provide recommendations for, as well as taking in the diversification parameter as described above.  
 
 
 ### FLASK app  
 [View the FLASK app](https://github.com/melodygr/grocery_recommendation/tree/main/flask_app "FLASK app")  
   
-I have begun the development of a FLASK app to generate grocery recommendations through a website.  It currently has four pages: the index, nlp, svd, and a bmi calculator.  However, more work needs to be done on the functionality of the pages and their ability to return the recommendations.  More to follow.
+I have begun the development of a FLASK app to generate grocery recommendations through a website.  It currently has four pages: the index, nlp recommender, and svd recommender.  However, more work needs to be done on the functionality of the pages and their ability to return the recommendations.  More to follow.
 
 
 ### Conclusions  
