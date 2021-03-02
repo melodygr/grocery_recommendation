@@ -28,14 +28,15 @@ def nlppage():
 
 @app.route('/svd', methods=['GET', 'POST'])
 def svdpage():
-    svd = ''
+    svd_recs = ''
+    num_results = ''
     if request.method == 'POST' and 'num_to_rate' in request.form:
         rate_aisle = request.form.get('rate_aisle')
         n_to_rate = float(request.form.get('num_to_rate'))
         rec_aisle = request.form.get('rec_aisle')
         n_to_rec = float(request.form.get('num_to_rec'))
         percent_diverse = float(request.form.get('diversity_index'))
-        svd_recs = generate_new_user_recommendations(n_to_rate, n_to_rec, percent_diverse, rate_aisle=rate_aisle, rec_aisle=rec_aisle)
+        num_results, svd_recs = generate_new_user_recommendations(n_to_rate, n_to_rec, percent_diverse, rate_aisle=rate_aisle, rec_aisle=rec_aisle)
     return render_template('svd.html',
                             svd_recs=svd_recs,
                             num_results=num_results)                              
