@@ -66,7 +66,7 @@ def stem_and_vectorize_products_based_on_metadata(product_input):
     similarity_scores = simil_scores.sort_values(['score'], ascending=False)[:item_count]
 
 
-    return item_count, (products_desc.iloc[list(similarity_scores.index)]).to_html(index=False, justify='center')
+    return item_count, (products_desc.iloc[list(similarity_scores.index)]).to_html(index=False, justify='center', classes='table1', border=2)
 
 def grocery_rater(df, num, aisle=None):
     userID = 300000

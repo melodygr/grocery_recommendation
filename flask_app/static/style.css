@@ -1,15 +1,22 @@
 
 
 h1 {
-    text-align: center;
+    text-align: left;
 }
+
 
 body {
 		background-color: lightslategray;
+        background-image: url('/static/grocery-shop-safely.jpg')
+
 }
 
 .main {
     padding-left: 100px;
     padding-right: 100px;
     text-align: left;
+}
+
+.table1 {
+    background-color:rgb(130, 238, 202)
 }
