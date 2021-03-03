@@ -14,7 +14,6 @@ app = Flask(__name__)
 def rootpage():
     return render_template('index.html')
 
-
 @app.route('/nlp', methods=['GET', 'POST'])
 def nlppage():
     nlp = ''
@@ -40,6 +39,34 @@ def svdpage():
                             svd_recs=svd_recs,
                             num_results=num_results)                              
                         
+@app.route('/rating', methods=['GET', 'POST'])
+def ratingpage():
+    if n_to_rate == None:
+        return render_template('svd.html',
+                                svd_recs='',
+                                num_results=0)
+    if n_left_to_rate == None:
+        ratings_list=[]
+        n_left_to_rate = n_to_rate        
+    
+    if n_left_to_rate == 0:
+        num_results, svd_recs = generate_recs(ratings_list, n_to_rec, percent_diverse, rec_aisle=rec_aisle)
+        return render_template('svd.html',
+                                svd_recs=svd_recs,
+                                num_results=num_results)
+    else:
+        product = get_sample_product(rate_aisle)
+        rating = float(request.form.get('num_to_rate'))
+        ratings_list.append([product, rating])
+        n_left_to_rate -= 1
+        return render_template('rating.html',
+                                n_left_to_rate=n_left_to_rate,
+                                n_to_rate=n_to_rate,
+                                n_to_rec=n_to_rec,
+                                percent_diverse=percent_diverse,
+                                rate_aisle=rate_aisle,
+                                rec_aisle=rec_aisle,
+                                ratings_list=ratings_list)                                                     
 
 if __name__ == "__main__":
     app.run(debug=True)

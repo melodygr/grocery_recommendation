@@ -59,6 +59,46 @@ def stem_and_vectorize_products_based_on_metadata(product_input):
 
     return item_count, (products_desc.iloc[list(similarity_scores.index)]).to_html(index=False, justify='center', classes='table1', border=2)
 
+def get_sample_product(aisle=None):
+    if aisle:
+        product = products_desc[products_desc['Aisle'].str.contains(aisle)].sample(1)
+    else:
+        product = products_desc.sample(1)
+    return product
+
+def generate_recs(ratings_list, n_to_rec, percent_diverse, rec_aisle=rec_aisle):
+    # Convert ratings list to user_ratings
+    userID = 300000
+    user_rating =[]
+    for product, rating in ratings_list:
+        rating_one_product = {'user_id':userID,'product_id':product['Product ID'].iloc[0],'rating':int(rating)}
+        user_rating.append(rating_one_product) 
+
+    # add the new ratings to the original ratings DataFrame
+    print('Creating ratings dataset...')
+    new_ratings_df = new_rec_df.append(user_rating, ignore_index=True)
+    new_data = Dataset.load_from_df(new_ratings_df, reader)
+    
+    # train a model using the new combined DataFrame
+    print('Training recommendation model...')
+    new_user_svd = SVD(n_factors = 20, n_epochs = 10, lr_all = 0.005, reg_all = 0.4)
+    new_user_svd.fit(new_data.build_full_trainset())
+    
+    # make predictions for the user
+    print('Making predictions...')
+    list_of_products = []
+    for product in new_ratings_df['product_id'].unique():
+        product_name = products_desc[products_desc['Product ID'] == product]['Product Name'].iloc[0]
+        product_aisle = products_desc[products_desc['Product ID'] == product]['Aisle'].iloc[0]
+        list_of_products.append((product, round(new_user_svd.predict(300000, product)[3], 3), product_name, product_aisle))
+    
+    # order the predictions from highest to lowest rated
+    ranked_products = sorted(list_of_products, key=lambda x:x[1], reverse=True)
+    
+    # return the top n recommendation
+    num_results, svd_recs = recommend_diverse_products(ranked_products, n_to_rec, aisle=rec_aisle, percent_diverse=percent_diverse)
+    return num_results, svd_recs
+
 def grocery_rater(df, num, aisle=None):
     userID = 300000
     rating_list = []
