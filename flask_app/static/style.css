@@ -2,7 +2,7 @@
 
 h1 {
     text-align: left;
-    padding-left: 100pt;
+    padding-left: 100px;
 }
 
 
@@ -29,7 +29,7 @@ body {
     font-size: 0.9em;
 }
 
-  th {background-color: orange; padding: 10px}
+  th {background-color: rgb(250, 176, 40); padding: 10px}
   td {padding: 5px}
   
   tr:nth-child(odd)		{ background-color:#eee; }

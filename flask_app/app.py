@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, session
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.feature_extraction.text import CountVectorizer
 import nltk
@@ -9,6 +9,7 @@ import numpy as np
 import pickle
 
 app = Flask(__name__)
+app.secret_key = 'any random string'
 
 @app.route('/', methods=['GET', 'POST'])
 def rootpage():
@@ -41,52 +42,38 @@ def svdpage():
 
 @app.route('/feed', methods=['GET', 'POST'])
 def feedpage():
-    # svd_recs = ''
-    # num_results = 0
-    n_left_to_rate = None
+    session['n_left_to_rate'] = None
     if request.method == 'POST' and 'num_to_rate' in request.form:
-        rate_aisle = request.form.get('rate_aisle')
-        n_to_rate = float(request.form.get('num_to_rate'))
-        rec_aisle = request.form.get('rec_aisle')
-        n_to_rec = float(request.form.get('num_to_rec'))
-        percent_diverse = float(request.form.get('diversity_index'))
-        # num_results, svd_recs = generate_new_user_recommendations(n_to_rate, n_to_rec, percent_diverse, rate_aisle=rate_aisle, rec_aisle=rec_aisle)
-    return render_template('rating.html',
-                            rate_aisle=rate_aisle,
-                            n_to_rate=n_to_rate,
-                            rec_aisle=rec_aisle,
-                            n_to_rec=n_to_rec,
-                            percent_diverse=percent_diverse,
-                            n_left_to_rate=n_left_to_rate)                                                          
+        session['rate_aisle'] = request.form.get('rate_aisle')
+        session['n_to_rate'] = float(request.form.get('num_to_rate'))
+        session['rec_aisle'] = request.form.get('rec_aisle')
+        session['n_to_rec'] = float(request.form.get('num_to_rec'))
+        session['percent_diverse'] = float(request.form.get('diversity_index'))
+        return render_template('rating.html')
+    else:
+        return render_template('feed.html')                                                                                      
                         
 @app.route('/rating', methods=['GET', 'POST'])
 def ratingpage():
-    if n_to_rate == None:
+    if session['n_to_rate'] == None:
         return render_template('svd.html',
                                 svd_recs='',
                                 num_results=0)
-    if n_left_to_rate == None:
+    if session['n_left_to_rate'] == None:
         ratings_list=[]
-        n_left_to_rate = n_to_rate        
+        session['n_left_to_rate'] = session['n_to_rate']        
     
-    if n_left_to_rate == 0:
-        num_results, svd_recs = generate_recs(ratings_list, n_to_rec, percent_diverse, rec_aisle=rec_aisle)
+    if session['n_left_to_rate'] == 0:
+        num_results, svd_recs = generate_recs(ratings_list, session['n_to_rec'], session['percent_diverse'], rec_aisle=session['rec_aisle'])
         return render_template('svd.html',
                                 svd_recs=svd_recs,
                                 num_results=num_results)
     else:
-        product = get_sample_product(rate_aisle)
+        product = get_sample_product(session['rate_aisle'])
         rating = float(request.form.get('num_to_rate'))
         ratings_list.append([product, rating])
         n_left_to_rate -= 1
-        return render_template('rating.html',
-                                n_left_to_rate=n_left_to_rate,
-                                n_to_rate=n_to_rate,
-                                n_to_rec=n_to_rec,
-                                percent_diverse=percent_diverse,
-                                rate_aisle=rate_aisle,
-                                rec_aisle=rec_aisle,
-                                ratings_list=ratings_list)                                                     
+        return render_template('rating.html')                                                     
 
 if __name__ == "__main__":
     app.run(debug=True)
