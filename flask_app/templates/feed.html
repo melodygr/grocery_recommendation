@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Singular Value Decomposition Grocery Recommender</title>
+
+    <link rel='stylesheet' type='text/css' href="{{ url_for('static', filename='style.css') }}">
+
+    <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.5/build/pure-min.css" integrity="sha384-LTIDeidl25h2dPxrB2Ekgc9c7sEC3CWGM6HeFmuDNUjX76Ert4Z4IY714dhZHPLd" crossorigin="anonymous">
+
+</head>
+
+<h1>SVD Grocery Recommender</h1>
+
+<body>
+
+<div class='main'>
+    <p>Enter information to get product recommendations: </p>
+    <form class="pure-form" method="POST" action="/svd">
+    Aisle to Rate: (enter 0 for any)<br>
+    <input type="text" name="rate_aisle"><br>
+    Number of products to rate:<br>
+    <input type="text" name="num_to_rate"><br>
+    Aisle to Recommend: (enter 0 for any)<br>
+    <input type="text" name="rec_aisle"><br>
+    Number of products to recommend:<br>
+    <input type="text" name="num_to_rec"><br>
+    Diversity index: (percent 0.00 to 1.00)
+    <input type="text" name="diversity_index"><br>
+    <button type="submit" class="pure-button pure-button-primary" value="Submit">Submit</button>
+    </form>
+</div>
+
+<br>
+
+<div class='main'>
+    <!-- {% if (request.method == 'POST') and ('num_to_rec' in request.form) and (num_results == 0) %}
+        <p>No similar products found.  Please refine your search terms and try again!</p>
+    {% endif %}
+
+
+    {% if (request.method == 'POST') and (num_results>0) %}
+    <div class="container">
+        {{ svd_recs|safe }} 
+    {% endif %}     -->
+    <br/>
+    <form class="pure-form" method="POST" action="/nlp">
+        <button type="submit" class="pure-button pure-button-active" value="Submit">Try the NLP</button>
+    </form>    
+    <br/>
+    <form class="pure-form" method="POST" action="/">
+        <button type="submit" class="pure-button pure-button-active" value="Submit">Home</button>
+    </form>   
+    <br/>
+</div>
+
+</body>

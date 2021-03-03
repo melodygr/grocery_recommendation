@@ -3,7 +3,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.feature_extraction.text import CountVectorizer
 import nltk
 from nltk.stem.snowball import SnowballStemmer
-from user_functions import stem_and_vectorize_products_based_on_metadata, generate_new_user_recommendations
+from user_functions import stem_and_vectorize_products_based_on_metadata, generate_new_user_recommendations, generate_recs, get_sample_product
 import pandas as pd
 import numpy as np
 import pickle
@@ -37,7 +37,27 @@ def svdpage():
         num_results, svd_recs = generate_new_user_recommendations(n_to_rate, n_to_rec, percent_diverse, rate_aisle=rate_aisle, rec_aisle=rec_aisle)
     return render_template('svd.html',
                             svd_recs=svd_recs,
-                            num_results=num_results)                              
+                            num_results=num_results) 
+
+@app.route('/feed', methods=['GET', 'POST'])
+def feedpage():
+    # svd_recs = ''
+    # num_results = 0
+    n_left_to_rate = None
+    if request.method == 'POST' and 'num_to_rate' in request.form:
+        rate_aisle = request.form.get('rate_aisle')
+        n_to_rate = float(request.form.get('num_to_rate'))
+        rec_aisle = request.form.get('rec_aisle')
+        n_to_rec = float(request.form.get('num_to_rec'))
+        percent_diverse = float(request.form.get('diversity_index'))
+        # num_results, svd_recs = generate_new_user_recommendations(n_to_rate, n_to_rec, percent_diverse, rate_aisle=rate_aisle, rec_aisle=rec_aisle)
+    return render_template('rating.html',
+                            rate_aisle=rate_aisle,
+                            n_to_rate=n_to_rate,
+                            rec_aisle=rec_aisle,
+                            n_to_rec=n_to_rec,
+                            percent_diverse=percent_diverse,
+                            n_left_to_rate=n_left_to_rate)                                                          
                         
 @app.route('/rating', methods=['GET', 'POST'])
 def ratingpage():

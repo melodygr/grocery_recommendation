@@ -66,7 +66,7 @@ def get_sample_product(aisle=None):
         product = products_desc.sample(1)
     return product
 
-def generate_recs(ratings_list, n_to_rec, percent_diverse, rec_aisle=rec_aisle):
+def generate_recs(ratings_list, n_to_rec, percent_diverse, rec_aisle=None):
     # Convert ratings list to user_ratings
     userID = 300000
     user_rating =[]
