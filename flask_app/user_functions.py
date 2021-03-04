@@ -56,7 +56,6 @@ def stem_and_vectorize_products_based_on_metadata(product_input):
     
     similarity_scores = simil_scores.sort_values(['score'], ascending=False)[:item_count]
 
-
     return item_count, (products_desc.iloc[list(similarity_scores.index)]).to_html(index=False, justify='center', classes='table1', border=2)
 
 def get_sample_product(aisle=None):
@@ -64,14 +63,17 @@ def get_sample_product(aisle=None):
         product = products_desc[products_desc['Aisle'].str.contains(aisle)].sample(1)
     else:
         product = products_desc.sample(1)
-    return product
+    name = product['Product Name'].iloc[0]
+    prod_aisle = product['Aisle'].iloc[0]
+    prod_id = product['Product ID'].iloc[0]  
+    return name, prod_aisle, prod_id
 
 def generate_recs(ratings_list, n_to_rec, percent_diverse, rec_aisle=None):
     # Convert ratings list to user_ratings
     userID = 300000
     user_rating =[]
     for product, rating in ratings_list:
-        rating_one_product = {'user_id':userID,'product_id':product['Product ID'].iloc[0],'rating':int(rating)}
+        rating_one_product = {'user_id':userID,'product_id':product,'rating':rating}
         user_rating.append(rating_one_product) 
 
     # add the new ratings to the original ratings DataFrame
@@ -97,6 +99,7 @@ def generate_recs(ratings_list, n_to_rec, percent_diverse, rec_aisle=None):
     
     # return the top n recommendation
     num_results, svd_recs = recommend_diverse_products(ranked_products, n_to_rec, aisle=rec_aisle, percent_diverse=percent_diverse)
+    print('Complete')
     return num_results, svd_recs
 
 def grocery_rater(df, num, aisle=None):

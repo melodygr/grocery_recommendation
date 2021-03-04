@@ -14,10 +14,16 @@
 <body>
 
 <div class='main'>
-    {{ product['Product Name'].iloc[0] }}
+    <br/>
+    <table>
+    <th>{{ session['prod_name'] }}</th>
+    </table>
+    <br/>
     <form class="pure-form" method="POST" action="/rating">
-    Please give your rating for this product on a scale of 1 to 5: (enter 0 for a new product)<br>
-    <input type="text" name="rate_product"><br>
+    Please give your rating for this product on a scale of 1 to 5: (enter 0 for a different product)
+    <br/>
+    <input type="text" name="rate_product">
+    <br/>
     <button type="submit" class="pure-button pure-button-primary" value="Submit">Submit</button>
     </form>
 </div>
@@ -25,16 +31,6 @@
 <br>
 
 <div class='main'>
-    <!-- {% if (request.method == 'POST') and ('num_to_rec' in request.form) and (num_results == 0) %}
-        <p>No similar products found.  Please refine your search terms and try again!</p>
-    {% endif %}
-
-
-    {% if (request.method == 'POST') and (num_results>0) %}
-    <div class="container">
-        {{ svd_recs|safe }} 
-    {% endif %}     -->
-
     <br/>
 </div>
 

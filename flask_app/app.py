@@ -29,19 +29,6 @@ def nlppage():
 def svdpage():
     svd_recs = ''
     num_results = 0
-    if request.method == 'POST' and 'num_to_rate' in request.form:
-        rate_aisle = request.form.get('rate_aisle')
-        n_to_rate = float(request.form.get('num_to_rate'))
-        rec_aisle = request.form.get('rec_aisle')
-        n_to_rec = float(request.form.get('num_to_rec'))
-        percent_diverse = float(request.form.get('diversity_index'))
-        num_results, svd_recs = generate_new_user_recommendations(n_to_rate, n_to_rec, percent_diverse, rate_aisle=rate_aisle, rec_aisle=rec_aisle)
-    return render_template('svd.html',
-                            svd_recs=svd_recs,
-                            num_results=num_results) 
-
-@app.route('/feed', methods=['GET', 'POST'])
-def feedpage():
     session['n_left_to_rate'] = None
     if request.method == 'POST' and 'num_to_rate' in request.form:
         session['rate_aisle'] = request.form.get('rate_aisle')
@@ -49,31 +36,36 @@ def feedpage():
         session['rec_aisle'] = request.form.get('rec_aisle')
         session['n_to_rec'] = float(request.form.get('num_to_rec'))
         session['percent_diverse'] = float(request.form.get('diversity_index'))
+        session['prod_name'], session['prod_aisle'], session['prod_id'] = get_sample_product(session['rate_aisle'])
+        session['n_left_to_rate'] = session['n_to_rate'] -1
+        session['ratings_list'] = []
         return render_template('rating.html')
     else:
-        return render_template('feed.html')                                                                                      
+        return render_template('svd.html',
+                            svd_recs=svd_recs,
+                            num_results=num_results)                                                                                                                   
                         
 @app.route('/rating', methods=['GET', 'POST'])
 def ratingpage():
     if session['n_to_rate'] == None:
         return render_template('svd.html',
                                 svd_recs='',
-                                num_results=0)
-    if session['n_left_to_rate'] == None:
-        ratings_list=[]
-        session['n_left_to_rate'] = session['n_to_rate']        
+                                num_results=0)     
     
     if session['n_left_to_rate'] == 0:
-        num_results, svd_recs = generate_recs(ratings_list, session['n_to_rec'], session['percent_diverse'], rec_aisle=session['rec_aisle'])
+        num_results, svd_recs = generate_recs(session['ratings_list'], session['n_to_rec'], session['percent_diverse'], rec_aisle=session['rec_aisle'])
         return render_template('svd.html',
                                 svd_recs=svd_recs,
                                 num_results=num_results)
+    elif 'rate_product' in request.form:
+        rating = float(request.form.get('rate_product'))
+        session['ratings_list'].append([session['prod_id'], rating])
+        session['n_left_to_rate'] -= 1
+        session['prod_name'], session['prod_aisle'], session['prod_id'] = get_sample_product(session['rate_aisle'])
+        return render_template('rating.html')
     else:
-        product = get_sample_product(session['rate_aisle'])
-        rating = float(request.form.get('num_to_rate'))
-        ratings_list.append([product, rating])
-        n_left_to_rate -= 1
-        return render_template('rating.html')                                                     
+        return render_template('rating.html')    
+
 
 if __name__ == "__main__":
     app.run(debug=True)
