@@ -108,7 +108,7 @@ Lift = Support (X, Y) / ( Support(X) * Support(Y) )
 
 Using association rules derived from these probablities for each product pair ordered for each cluster, I can generate recommendations for new products based on a single product purchased or 'added to cart'.
 
-This chart shows the association rules for Cluster 19 at a product level.  You can see...  
+This chart shows the association rules for Cluster 19 at a product level.  You can see that the product pairs with high lift seem likely to be purchased together, such as the two different condensed soups.  But products with very low lift are unlikely to be purchased together.
 
 ![Rules](https://github.com/melodygr/grocery_recommendation/blob/main/Images/mba_by_product_19.png "Rules for cluster 19")  
 
