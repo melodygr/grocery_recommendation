@@ -103,7 +103,7 @@ Association rules indicate a strong relationship between items that customers pu
 **Frequency**: Probability of buying a product or pair of products  
 **Support**: Probability of buying X and Y products together:  Support(X, Y) = Freq(X,Y)/N  
 **Confidence**: This says how likely item Y is purchased when item X is purchased.   Confidence(X, Y) = Freq(X,Y) / Freq(X)  
-**Lift**: Shows how likely item Y is purchased when item X is purchased, while controlling for how popular item Y is.  
+**Lift**: Shows how likely item Y is purchased when item X is purchased, while controlling for how popular they are.  
 Lift = Support (X, Y) / ( Support(X) * Support(Y) )  
 
 Using association rules derived from these probablities for each product pair ordered for each cluster, I can generate recommendations for new products based on a single product purchased or 'added to cart'.
@@ -123,6 +123,8 @@ Using association rules derived from these probablities for each product pair or
 [View the FLASK app](https://github.com/melodygr/grocery_recommendation/tree/main/flask_app "FLASK app")  
   
 I have begun the development of a FLASK app to generate grocery recommendations through a website.  It currently has four pages: the index, nlp recommender, ratings and svd recommender.  However, more work needs to be done on the functionality of the pages and their ability to return the recommendations.  The NLP recommender is up-to-date but the SVD recommender takes a long time to run because it fits and predicts a whole new model based on the user's input.  If I can find a cluster for the new user that should shorted my time considerably.  I also intend to add a page for the market basket analysis that will suggest products based on the association rules for each cluster.  More to follow.
+
+![FLASK app](https://github.com/melodygr/grocery_recommendation/blob/main/Images/svd_page_screenshot.png "FLASK app")
 
 
 ### Conclusions  
