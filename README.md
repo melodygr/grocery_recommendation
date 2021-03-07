@@ -108,9 +108,15 @@ Lift = Support (X, Y) / ( Support(X) * Support(Y) )
 
 Using association rules derived from these probablities for each product pair ordered for each cluster, I can generate recommendations for new products based on a single product purchased or 'added to cart'.
 
-![Rules](https://github.com/melodygr/grocery_recommendation/blob/main/Images/mba_by_product_19.png "Rules for cluster 19")
+This chart shows the association rules for Cluster 19 at a product level.  You can see...  
 
-![Rules by Aisle](https://github.com/melodygr/grocery_recommendation/blob/main/Images/mba_aisle_output.png "Rules by Aisle")
+![Rules](https://github.com/melodygr/grocery_recommendation/blob/main/Images/mba_by_product_19.png "Rules for cluster 19")  
+
+This chart shows the association rules at an aisle level, showing the likelihood of buying from aisle B if you are making a purchase from aisle A.  
+
+![Rules by Aisle](https://github.com/melodygr/grocery_recommendation/blob/main/Images/mba_aisle_output.png "Rules by Aisle")  
+
+Finally, this output shows what product are recommended to each cluster if they are purchasing "Mild Salsa Roja".  
 
 <img src= 
 "Images/mba_by_cluster.png" 
@@ -122,7 +128,7 @@ Using association rules derived from these probablities for each product pair or
 ### FLASK app  
 [View the FLASK app](https://github.com/melodygr/grocery_recommendation/tree/main/flask_app "FLASK app")  
   
-I have begun the development of a FLASK app to generate grocery recommendations through a website.  It currently has four pages: the index, nlp recommender, ratings and svd recommender.  However, more work needs to be done on the functionality of the pages and their ability to return the recommendations.  The NLP recommender is up-to-date but the SVD recommender takes a long time to run because it fits and predicts a whole new model based on the user's input.  If I can find a cluster for the new user that should shorted my time considerably.  I also intend to add a page for the market basket analysis that will suggest products based on the association rules for each cluster.  More to follow.
+I have begun the development of a FLASK app to generate grocery recommendations through a website.  It currently has four pages: the index, nlp recommender, ratings and svd recommender.  However, more work needs to be done on the functionality of the pages and their ability to return the recommendations.  The NLP recommender is up-to-date but the SVD recommender takes a long time to run because it fits and predicts a whole new model based on the user's input.  If I can find a cluster for the new user that should shorten the run time considerably.  I also intend to add a page for the market basket analysis that will suggest products based on the association rules for each cluster.  More to follow.
 
 ![FLASK app](https://github.com/melodygr/grocery_recommendation/blob/main/Images/svd_page_screenshot.png "FLASK app")
 
