@@ -16,15 +16,15 @@ Prepared and Presented by:  **_Melody Peterson_**
 ### Business Problem    
 For this analysis I will be working as a Data Scientist for a grocery store that is looking to discover insights from sales data that could be used for targeted direct mail marketing (specific coupons mailed to customers), targeted email marketing ("An item you like has gone on sale!"), and online shopper recommendations to 'add to cart' based on similar items and also based on items other people who bought that item have purchased.  
 <br/>
-If time permits, I may also perform a market basket analysis to forecast what products a customer is likely to purchase in their next order.  
 
 ### Skills demonstrated:  
 
 1. Data Clustering on users  
 2. Recommendation systems - Content-based filtering and Collaborative filtering 
-3. NLP product search engine  
-3. Market Basket analysis  
-4. FLASK Website interface  
+3. NLP product search engine   
+5. Market Basket analysis  
+6. FLASK Website interface 
+ 
   
 ### Data    
 This data was retrieved from [Kaggle](https://www.kaggle.com/psparks/instacart-market-basket-analysis) and was provided by Instacart for a market basket analysis competition in 2018.  
@@ -96,10 +96,33 @@ I created a function that would generate predicted ratings for each user based o
 I also created a function to allow a new user to generate product recommendations by providing a specified number of ratings on sample products, and then rerunning the SVD to generate a list of predictions based on those rankings.  This function allows the user to optionally choose which aisle to rate products from, and which aisle to provide recommendations for, as well as taking in the diversification parameter as described above.  
 
 
+### Market Basket Analysis
+
+Association rules indicate a strong relationship between items that customers purchased in the same transaction.   
+  
+**Frequency**: Probability of buying a product or pair of products  
+**Support**: Probability of buying X and Y products together:  Support(X, Y) = Freq(X,Y)/N  
+**Confidence**: This says how likely item Y is purchased when item X is purchased.   Confidence(X, Y) = Freq(X,Y) / Freq(X)  
+**Lift**: Shows how likely item Y is purchased when item X is purchased, while controlling for how popular item Y is.  
+Lift = Support (X, Y) / ( Support(X) * Support(Y) )  
+
+Using association rules derived from these probablities for each product pair ordered for each cluster, I can generate recommendations for new products based on a single product purchased or 'added to cart'.
+
+![Rules](https://github.com/melodygr/grocery_recommendation/blob/main/Images/mba_by_product_19.png "Rules for cluster 19")
+
+![Rules by Aisle](https://github.com/melodygr/grocery_recommendation/blob/main/Images/mba_aisle_output.png "Rules by Aisle")
+
+<img src= 
+"Images/mba_by_cluster.png" 
+         alt="rules output" 
+         align="center"
+         width="400" height="400"> 
+
+
 ### FLASK app  
 [View the FLASK app](https://github.com/melodygr/grocery_recommendation/tree/main/flask_app "FLASK app")  
   
-I have begun the development of a FLASK app to generate grocery recommendations through a website.  It currently has four pages: the index, nlp recommender, and svd recommender.  However, more work needs to be done on the functionality of the pages and their ability to return the recommendations.  More to follow.
+I have begun the development of a FLASK app to generate grocery recommendations through a website.  It currently has four pages: the index, nlp recommender, ratings and svd recommender.  However, more work needs to be done on the functionality of the pages and their ability to return the recommendations.  The NLP recommender is up-to-date but the SVD recommender takes a long time to run because it fits and predicts a whole new model based on the user's input.  If I can find a cluster for the new user that should shorted my time considerably.  I also intend to add a page for the market basket analysis that will suggest products based on the association rules for each cluster.  More to follow.
 
 
 ### Conclusions  
@@ -116,6 +139,6 @@ I have begun the development of a FLASK app to generate grocery recommendations 
 * Create a dashboard using DASH for graphical representation of the clusters  
 * Generate word embeddings for the search engine for more specific search results
 * Create SQL tables of the data and load onto AWS
+* Add association rules to FLASK app
 * Use Heroku to push local FLASK app to the web
-* Perform market basket analysis by cluster using efficient-apriori model
 
