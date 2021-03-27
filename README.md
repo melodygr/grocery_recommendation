@@ -128,7 +128,7 @@ Finally, this output shows what product are recommended to each cluster if they 
 ### FLASK app  
 [View the FLASK app](https://github.com/melodygr/grocery_recommendation/tree/main/flask_app "FLASK app")  
   
-I have begun the development of a FLASK app to generate grocery recommendations through a website.  It currently has four pages: the index, nlp recommender, ratings and svd recommender.  However, more work needs to be done on the functionality of the pages and their ability to return the recommendations.  The NLP recommender is up-to-date but the SVD recommender takes a long time to run because it fits and predicts a whole new model based on the user's input.  If I can find a cluster for the new user that should shorten the run time considerably.  I also intend to add a page for the market basket analysis that will suggest products based on the association rules for each cluster.  More to follow.
+I have begun the development of a FLASK app to generate grocery recommendations through a website.  It currently has four pages: the index, nlp recommender, ratings and svd recommender.  However, more work needs to be done on the functionality of the pages and their ability to return the recommendations.  The NLP recommender is up-to-date but the SVD recommender takes a long time to run because it fits and predicts a whole new model based on the user's input.  If I can find a cluster for the new user, that should shorten the run time considerably.  I also intend to add a page for the market basket analysis that will suggest products based on the association rules for each cluster.  More to follow.
 
 ![FLASK app](https://github.com/melodygr/grocery_recommendation/blob/main/Images/svd_page_screenshot.png "FLASK app")
 
@@ -146,6 +146,7 @@ I have begun the development of a FLASK app to generate grocery recommendations 
 * Cluster again allowing more than 20 clusters to make some of the big clusters smaller?
 * Create a dashboard using DASH for graphical representation of the clusters  
 * Generate word embeddings for the search engine for more specific search results
+* Calculate and visualize error on the surprise model
 * Create SQL tables of the data and load onto AWS
 * Add association rules to FLASK app
 * Use Heroku to push local FLASK app to the web
