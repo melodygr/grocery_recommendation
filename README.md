@@ -59,7 +59,7 @@ Useful information can be derived from just exploring the purchasing patterns in
 #### Clustering  
 [View the Clustering notebook](https://github.com/melodygr/capstone_recommendation/blob/main/Clustering_and_NLP.ipynb "Clustering Notebook")  
 
-After EDA and merging of the table together, my first step was to cluster the users using a KMeans unsupervised clustering.  The clustering took into account how many purchases each user made from each aisle, as well as information such as number of days between orders and total number of orders placed.  As I added more clusters, the results continued to improve with more and more well-defined and separate clusters.  In the interest of practicality, however, I felt that more than 20 separate clusters of users began to be less feasible to separately market to each one.    
+After EDA and merging of the tables together, my first step was to cluster the users using a KMeans unsupervised clustering.  The clustering took into account how many purchases each user made from each aisle, as well as information such as number of days between orders and total number of orders placed.  As I added more clusters, the results continued to improve with more and more well-defined and separate clusters.  In the interest of practicality, however, I felt that more than 20 separate clusters of users began to be less feasible to separately market to each one.    
 
 For visualizing the clusters I used t-SNE dimensionality reduction to give each cluster only 3 attributes, lending itself to a 3D model as seen below using Matplotlib.  I also made this graph using Plotly for more interactivity if used in a dashboard for analysis.  
 
@@ -92,7 +92,7 @@ This graph conveys the idea of a short head versus long tail in my product data.
 
 ![Countplot](https://github.com/melodygr/grocery_recommendation/blob/main/Images/short_head.png "Short Head Product Graph")
 
-I created a function that would generate predicted ratings for each user based on the SVD model.  Then, before generating the output of the user ratings, the function takes in a specified weighting parameter for how many items should be generated from the short head of products or the rest of the products.  I defined the short head as the top 6200 (out of 45000) products which accounted for 80% of the purchases.  Generating the recommendations this way, allows to store to decide how diverse the ratings should be to encourage a diversity of recommendation, yet also keeps the ratings in the order they were predicted by the model and specific to each user.
+I created a function that would generate predicted ratings for each user based on the SVD model.  Then, before generating the output of the user ratings, the function takes in a specified weighting parameter for how many items should be generated from the short head of products or the rest of the products.  I defined the short head as the top 6200 (out of 45000) products which accounted for 80% of the purchases.  Generating the recommendations this way, allows the store to decide how diverse the ratings should be to encourage a diversity of recommendation, yet also keeps the ratings in the order they were predicted by the model and specific to each user.
 
 I also created a function to allow a new user to generate product recommendations by providing a specified number of ratings on sample products, and then rerunning the SVD to generate a list of predictions based on those rankings.  This function allows the user to optionally choose which aisle to rate products from, and which aisle to provide recommendations for, as well as taking in the diversification parameter as described above.  
 
@@ -117,7 +117,7 @@ This chart shows the association rules at an aisle level, showing the likelihood
 
 ![Rules by Aisle](https://github.com/melodygr/grocery_recommendation/blob/main/Images/mba_aisle_output.png "Rules by Aisle")  
 
-Finally, this output shows what product are recommended to each cluster if they are purchasing "Mild Salsa Roja".  
+Finally, this output shows what products are recommended to each cluster if they are purchasing "Mild Salsa Roja".  
 
 <img src= 
 "Images/mba_by_cluster.png" 
